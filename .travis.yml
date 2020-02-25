@@ -8,7 +8,7 @@ addons:
   sonarcloud:
     organization: "jhawk1196"
     token:
-      secure: SONAR-TOKEN
+      secure: ${SONAR-TOKEN}
 
 script:
   - sonar-scanner
