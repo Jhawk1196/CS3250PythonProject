@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.8"
+
+dist: xenial
+
+addons:
+  sonarcloud:
+    organization: "jhawk1196"
+    token:
+      secure: ${SONAR}
+
+script:
+  - sonar-scanner
