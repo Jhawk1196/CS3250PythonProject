@@ -29,6 +29,7 @@ SOFTWARE.
 from src.DataParser import get_soup, parse_record
 from src.db_connect import get_connection, get_max_records, execute_query
 from apscheduler.schedulers.blocking import BlockingScheduler
+from tkinter import ttk
 
 # from apscheduler.schedulers.background import BackgroundScheduler
 
