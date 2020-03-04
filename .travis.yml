@@ -11,3 +11,6 @@ addons:
 
 script:
   - sonar-scanner
+
+after_success:
+  - coveralls
