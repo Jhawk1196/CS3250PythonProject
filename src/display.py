@@ -1,10 +1,10 @@
 from tkinter import *
 
 
-def helloWorld():
+def helloWorld(feed):
     root = Tk()
-    w = Label(root, text="Hello, world!")
-    windowText = w.cget("text")
+    w = Label(root, text=str(feed))
+    window_text = w.cget("text")
     w.pack()
     root.mainloop()
-    return windowText
+    return window_text
