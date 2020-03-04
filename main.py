@@ -26,6 +26,6 @@ If one isn't specified it's an empty string.
 args = parse_args()
 print(f"file is: {args.file}")
 print(f"url is: {args.url}")
-feed = parse_url_feed("http://rss.cnn.com/rss/cnn_us.rss")
+feed = parse_url_feed(args.url)
 
 helloWorld(feed)
