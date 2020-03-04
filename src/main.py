@@ -3,8 +3,8 @@ Ok, Time to rewrite all of this....
 """
 
 from src.display import helloWorld
-from src.parser import test
+from src.parser import parse_url_feed
 
-helloWorld()
+feed = parse_url_feed("http://rss.cnn.com/rss/cnn_us.rss")
 
-test()
+helloWorld(feed)
