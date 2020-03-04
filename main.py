@@ -1,13 +1,5 @@
-"""
-Ok, Time to rewrite all of this....
-"""
-
 from src.display import helloWorld
-
-str = 'Insert message'
-helloWorld(str)
-
-from src.parser import test
+from src.parser import parse_url_feed
 import argparse
 
 
@@ -34,10 +26,6 @@ If one isn't specified it's an empty string.
 args = parse_args()
 print(f"file is: {args.file}")
 print(f"url is: {args.url}")
+feed = parse_url_feed("http://rss.cnn.com/rss/cnn_us.rss")
 
-
-
-helloWorld()
-
-test()
-
+helloWorld(feed)
