@@ -1,7 +1,19 @@
 from tkinter import *
+import tkinter as tk
 
-def helloWorld():
+def helloWorld(str):
     root = Tk()
-    w = Label(root, text="Hello, world!")
-    w.pack()
+    var = StringVar()
+    label = Message( root, textvariable=var, relief=RAISED )
+
+    var.set(str)
+
+
+    root.geometry("100x50")
+
+    button = tk.Button(text = "Click and Quit", command = root.quit)
+    button.pack()
+
+
+    label.pack()
     root.mainloop()
