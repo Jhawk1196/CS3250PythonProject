@@ -6,7 +6,7 @@ def helloWorld(str):
     root = Tk()
     var = StringVar()
     label = Message(root, textvariable=var)  # relief=RAISED
-    window_text = w.cget("text")
+    window_text = label.cget("text")
     var.set(str)
 
     root.geometry("100x50")
