@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
+import lxml
+
 
 def parse_url_feed(url):
     if not check_url(url):
@@ -22,6 +24,7 @@ def check_url(url):
     else:
         return False
 
+
 def find_parser(response):
     test_url = response.url
     test_string = (test_url[-3] + test_url[-2] + test_url[-1])
@@ -29,4 +32,3 @@ def find_parser(response):
         return "lxml"
     else:
         return "lxml-xml"
-
