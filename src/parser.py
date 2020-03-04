@@ -12,6 +12,5 @@ def parse_xml_feed(xml_input):
 def parse_url_feed(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'lxml-xml')
-    print(soup.prettify())
-    feed = soup.item.title
+    feed = soup.item.title.string
     return feed
