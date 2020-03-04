@@ -1,10 +1,19 @@
 from tkinter import *
+import tkinter as tk
 
 
-def helloWorld(feed):
+def helloWorld(str):
     root = Tk()
-    w = Label(root, text=str(feed))
+    var = StringVar()
+    label = Message(root, textvariable=var)  # relief=RAISED
     window_text = w.cget("text")
-    w.pack()
+    var.set(str)
+
+    root.geometry("100x50")
+
+    button = tk.Button(text="Click and Quit", command=root.quit)
+    button.pack()
+
+    label.pack()
     root.mainloop()
     return window_text
