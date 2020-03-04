@@ -1,10 +1,11 @@
 from tkinter import *
 import tkinter as tk
 
+
 def helloWorld(str):
     root = Tk()
     var = StringVar()
-    label = Message( root, textvariable=var, relief=RAISED )
+    label = Message( root, textvariable=var ) #relief=RAISED
 
     var.set(str)
 
@@ -17,3 +18,4 @@ def helloWorld(str):
 
     label.pack()
     root.mainloop()
+
