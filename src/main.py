@@ -3,6 +3,7 @@ Ok, Time to rewrite all of this....
 """
 
 from src.display import helloWorld
+from src.parser import test
 import argparse
 
 
@@ -17,7 +18,7 @@ def parse_args():
 
 
 """
-This parses the command line arguments. 
+This parses the command line arguments.
 We can easily add more later with more parser.add_argument.
 Examples: python main.py --url "http://rss.cnn.com/rss/cnn_us.rss"
           python main.py --file "some_file.json"
@@ -30,4 +31,8 @@ args = parse_args()
 print(f"file is: {args.file}")
 print(f"url is: {args.url}")
 
+
+
 helloWorld()
+
+test()
