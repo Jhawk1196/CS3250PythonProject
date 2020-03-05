@@ -2,14 +2,14 @@ from tkinter import *
 import tkinter as tk
 
 
-def helloWorld(str):
+def helloWorld(feed):
     root = Tk()
     var = StringVar()
     label = Message(root, textvariable=var)  # relief=RAISED
     window_text = label.cget("text")
-    var.set(str)
+    var.set(feed)
 
-    root.geometry("100x50")
+    root.geometry("500x500")
 
     button = tk.Button(text="Click and Quit", command=root.quit)
     button.pack()
