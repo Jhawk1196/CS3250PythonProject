@@ -7,8 +7,10 @@ dist: xenial
 addons:
   sonarcloud:
     organization: "jhawk1196"
-    token:
-      secure: ${SONAR}
+    token: ${SONAR}
 
 script:
   - sonar-scanner
+
+after_success:
+  - coveralls
