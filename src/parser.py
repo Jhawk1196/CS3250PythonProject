@@ -16,6 +16,8 @@ def parse_url_feed(url):
 
 def check_url(url):
     url = str(url)
+    if len(url) == 0:
+        return False
     test_string = (url[-3] + url[-2] + url[-1])
     if test_string == "rss":
         return True
