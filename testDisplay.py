@@ -4,4 +4,4 @@ import src.display as display
 
 class TestHelloWorld(unittest.TestCase):
     def runTest(self):
-        self.assertEqual('Hello, world!', display.helloWorld())
+        self.assertEqual("xkcd.com", display.helloWorld("http://xkcd.com/atom.xml"))
