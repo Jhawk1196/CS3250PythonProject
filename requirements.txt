@@ -1,0 +1,5 @@
+mock
+requests
+beautifulsoup4
+python-coveralls
+lxml
