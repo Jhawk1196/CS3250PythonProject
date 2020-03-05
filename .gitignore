@@ -80,6 +80,4 @@ modules.xml
 .idea/misc.xml
 *.ipr
 
-./venv
-
 # End of https://www.gitignore.io/api/pycharm+iml
