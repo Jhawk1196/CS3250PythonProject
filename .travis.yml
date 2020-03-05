@@ -9,8 +9,12 @@ addons:
     organization: "jhawk1196"
     token: ${SONAR}
 
+before_install:
+  - pip install coverage
+
 script:
   - sonar-scanner
+  - coverage run testParser.py
 
 after_success:
   - coveralls
