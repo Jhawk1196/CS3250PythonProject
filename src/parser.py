@@ -10,7 +10,7 @@ def parse_url_feed(url):
     parse_value = find_parser(response)
     soup = BeautifulSoup(response.content, parse_value)
     # print(soup.prettify())
-    feed = soup.entry.title.string
+    feed = soup.title.string
     return feed
 
 

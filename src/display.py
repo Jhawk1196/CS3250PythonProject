@@ -9,7 +9,7 @@ def helloWorld(feed):
     window_text = label.cget("text")
     var.set(feed)
 
-    root.geometry("100x50")
+    root.geometry("500x500")
 
     button = tk.Button(text="Click and Quit", command=root.quit)
     button.pack()

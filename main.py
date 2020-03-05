@@ -23,9 +23,15 @@ Examples: python main.py --url "http://rss.cnn.com/rss/cnn_us.rss"
 The function will return an object with attributes .file and .url.
 If one isn't specified it's an empty string.
 """
+
 args = parse_args()
 print(f"file is: {args.file}")
 print(f"url is: {args.url}")
-feed = parse_url_feed("http://xkcd.com/atom.xml")
+if args.url:
+    feed = parse_url_feed(args.url)
+elif args.file:
+    feed = parse_url_feed(args.file)
+else:
+    feed = parse_url_feed("http://xkcd.com/atom.xml")
 
 helloWorld(feed)
