@@ -1,7 +1,8 @@
 import unittest
-import src.display as display
-
+import display
 
 class TestHelloWorld(unittest.TestCase):
-    def runTest(self):
-        self.assertEqual('Hello, world!', display.helloWorld())
+    def test_Hello_World(self):
+        self.assertEqual('Hello, world!', display.helloWorld('Hello, world!'))
+    def test_Not_Hello_World(self):
+        self.assertNotEqual('Hello, world!', display.helloWorld('Goodbye, earth!'))
