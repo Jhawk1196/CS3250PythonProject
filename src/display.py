@@ -9,6 +9,7 @@ def helloWorld(feed):
     window_text = label.cget("text")
     var.set(feed)
 
+    root.title("T2: RSS Feed Parser") # What will we call this program?
     root.geometry("500x500")
 
     button = tk.Button(text="Click and Quit", command=root.quit)
