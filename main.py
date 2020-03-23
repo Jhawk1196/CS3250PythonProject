@@ -11,6 +11,6 @@ if args.url:
 elif args.file:
     feed = parse_url_feed(args.file)
 else:
-    feed = parse_url_feed("http://xkcd.com/atom.xml")
+    feed = parse_url_feed("https://xkcd.com/atom.xml")
 
 helloWorld(feed)

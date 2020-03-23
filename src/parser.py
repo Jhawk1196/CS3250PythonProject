@@ -4,13 +4,16 @@ import lxml
 
 
 def parse_url_feed(url):
+    feed = []
+    i = 0
     if not check_url(url):
         return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml"
     response = requests.get(url)
     parse_value = find_parser(response)
     soup = BeautifulSoup(response.content, parse_value)
     # print(soup.prettify())
-    feed = soup.title.string
+    for entry in soup.find_all(string=True):
+        feed.append(entry)
     return feed
 
 
@@ -34,3 +37,7 @@ def find_parser(response):
         return "lxml"
     else:
         return "lxml-xml"
+
+
+def get_next_feed(prev):
+    pass

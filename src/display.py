@@ -18,3 +18,11 @@ def helloWorld(feed):
     label.pack()
     root.mainloop()
     return window_text
+
+"""
+while display is not quitting:
+    while list is not finished:
+        iterate through the list
+    if the list does end:
+        update the list
+"""
