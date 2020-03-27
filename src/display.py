@@ -6,9 +6,9 @@ def helloWorld(feed):
     root = Tk()
     var = StringVar()
     label = Message(root, textvariable=var)  # relief=RAISED
-    window_text = label.cget("text")
     var.set(feed)
-
+    window_text = var.get()
+    
     root.geometry("500x500")
 
     button = tk.Button(text="Click and Quit", command=root.quit)
