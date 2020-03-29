@@ -4,9 +4,8 @@ from src.parser import parse_url_feed
 
 
 def helloWorld(args):
-
     if args.url is not None:
-        feed = parse_url_feed(args.url)
+        feed = parse_url_feed(args.url[0])
     elif args.file is not None:
         feed = parse_url_feed(args.file)
     else:
