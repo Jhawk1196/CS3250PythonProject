@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import re
 import lxml
 
 
@@ -11,8 +12,8 @@ def parse_url_feed(url):
     response = requests.get(url)
     parse_value = find_parser(response)
     soup = BeautifulSoup(response.content, parse_value)
-    # print(soup.prettify())
-    for entry in soup.find_all(string=True):
+    print(soup.prettify())
+    for entry in soup.find_all(string=re.compile("<a")):
         feed.append(entry)
     return feed
 
@@ -25,6 +26,8 @@ def check_url(url):
     if test_string == "rss":
         return True
     elif test_string == "xml":
+        return True
+    elif test_string == "tml":
         return True
     else:
         return False
