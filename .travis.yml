@@ -13,7 +13,7 @@ before_install:
   - pip install coverage
 
 script:
-  - ./tests/testArgument_Parser.py
+  - testArgument_Parser.py
   - coverage report
   - sonar-scanner
 
