@@ -6,13 +6,12 @@ import lxml
 
 def parse_url_feed(url):
     feed = []
-    i = 0
     if not check_url(url):
         return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml"
     response = requests.get(url)
     parse_value = find_parser(response)
     soup = BeautifulSoup(response.content, parse_value)
-    print(soup.prettify())
+    # print(soup.prettify())
     if soup.rss is not None:
         tag = soup.rss
         tag = tag.channel
