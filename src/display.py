@@ -5,9 +5,9 @@ from src.parser import parse_url_feed
 
 def helloWorld(args):
 
-    if args.url:
+    if args.url is not None:
         feed = parse_url_feed(args.url)
-    elif args.file:
+    elif args.file is not None:
         feed = parse_url_feed(args.file)
     else:
         feed = parse_url_feed("http://feeds.feedburner.com/ign/all")

@@ -34,6 +34,7 @@ def check_url(url):
     if len(url) == 0:
         return False
     test_string = (url[-3] + url[-2] + url[-1])
+    second_test_string = ""
     if len(url) > 11:
         second_test_string = (url[7] + url[8] + url[9] + url[10] + url[11])
     if test_string == "rss":
