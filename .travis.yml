@@ -13,7 +13,7 @@ before_install:
   - pip install coverage
 
 script:
-  - coverage run -m tests
+  - coverage run -m ./tests
   - coverage report
   - sonar-scanner
 
