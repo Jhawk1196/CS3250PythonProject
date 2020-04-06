@@ -27,4 +27,4 @@ class test_URL_Check(unittest.TestCase):
         self.assertEqual(parser.parse_url_feed('randomwords'), "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml")
 
     def test_URL_Check_incompat(self):
-       self.assertFalse(parser.check_url('nevergonnagiveyouup'))
+        self.assertFalse(parser.check_url('nevergonnagiveyouup'))
