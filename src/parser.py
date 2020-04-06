@@ -6,26 +6,32 @@ import lxml
 
 def parse_url_feed(url):
     feed = []
-    if not check_url(url):
-        return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml"
-    response = requests.get(url)
-    parse_value = find_parser(response)
-    soup = BeautifulSoup(response.content, parse_value)
-    # print(soup.prettify())
-    if soup.rss is not None:
-        tag = soup.rss
-        tag = tag.channel
-        for title in tag.find_all(re.compile("title")):
-            for entry in title.find_all(string=True):
-                feed.append(entry)
-    elif soup.find_all(re.compile("atom")) is not None:
-        tag = soup.feed
-        for entry in tag.find_all("entry"):
-            for title in entry.find_all("title"):
-                for string in title.find_all(string=True):
-                    feed.append(string)
-    feed = fix_feed(feed)
-    return feed
+    url_list = []
+    if isinstance(url, str):
+        url_list.append(url)
+    elif isinstance(url, list):
+        url_list = url
+    for url_entry in url_list:
+        if not check_url(url_entry):
+            return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml"
+        response = requests.get(url_entry)
+        parse_value = find_parser(response)
+        soup = BeautifulSoup(response.content, parse_value)
+        # print(soup.prettify())
+        if soup.rss is not None:
+            tag = soup.rss
+            tag = tag.channel
+            for title in tag.find_all(re.compile("title")):
+                for entry in title.find_all(string=True):
+                    feed.append(entry)
+        elif soup.find_all(re.compile("atom")) is not None:
+            tag = soup.feed
+            for entry in tag.find_all("entry"):
+                for title in entry.find_all("title"):
+                    for string in title.find_all(string=True):
+                        feed.append(string)
+        feed = fix_feed(feed)
+        return feed
 
 
 def check_url(url):

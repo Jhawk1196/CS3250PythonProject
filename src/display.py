@@ -5,11 +5,11 @@ from src.parser import parse_url_feed
 
 def helloWorld(args):
     if args.url is not None:
-        feed = parse_url_feed(args.url[0])
+        feed = parse_url_feed(args.url)
     elif args.file is not None:
         feed = parse_url_feed(args.file)
     else:
-        feed = parse_url_feed("http://feeds.feedburner.com/ign/all")
+        feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
 
     root = Tk()
     var = StringVar()
