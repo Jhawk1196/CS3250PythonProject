@@ -6,6 +6,7 @@ import lxml
 
 def parse_url_feed(url):
     feed = []
+    total_feed = []
     url_list = []
     if isinstance(url, str):
         url_list.append(url)
@@ -31,7 +32,8 @@ def parse_url_feed(url):
                     for string in title.find_all(string=True):
                         feed.append(string)
         feed = fix_feed(feed)
-        return feed
+        total_feed.append(feed)
+    return total_feed
 
 
 def check_url(url):
