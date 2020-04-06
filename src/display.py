@@ -12,7 +12,7 @@ def displayView(args):
     elif args.file is not None:
         feed = parse_url_feed(args.file)
     else:
-        feed = parse_url_feed("http://feeds.feedburner.com/ign/all")
+        feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
 
     root = Tk()
     menubar = Menu(root)
