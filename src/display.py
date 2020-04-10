@@ -8,6 +8,8 @@ def helloWorld(args):
         feed = parse_url_feed(args.url)
     elif args.file is not None:
         feed = parse_url_feed(args.file)
+    #elif config file is not empty
+        #feed = parse_url_feed(config file url_list)
     else:
         feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
 
