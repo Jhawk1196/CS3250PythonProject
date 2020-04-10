@@ -1,4 +1,4 @@
-from src.display import helloWorld
+from src.display import displayView
 from src.argument_parser import parse_args
 
 args = parse_args()
@@ -9,4 +9,4 @@ args = parse_args()
 # https://www.foxnews.com/politics.html
 # http://feeds.feedburner.com/ign/all
 
-helloWorld(args)
+displayView(args)
