@@ -19,6 +19,8 @@ def display(args):
     feed = feed.split()
     feed = [item.replace(",", "\n\n•") for item in feed]
     root = Tk()
+    root.title("Team Woo")
+
     #Updated upstream
     menubar = Menu(root)
     var = StringVar()
