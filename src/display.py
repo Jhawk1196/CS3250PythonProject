@@ -16,7 +16,8 @@ def display(args):
     else:
         feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
     feed = str(feed)
-    feed = [item.replace(",", "\n•") for item in feed]
+    feed = feed.split()
+    feed = [item.replace(",", "\n\n•") for item in feed]
     root = Tk()
     #Updated upstream
     menubar = Menu(root)
@@ -68,7 +69,7 @@ def display(args):
     gui_color.add_command(label="Green", command=lambda: [label.configure(background= 'green'), root.update()])
     menubar.add_cascade(label="GUI Background Color", menu=gui_color)
 
-    root.configure(background='black')
+    root.configure(background='#a5acaf')
     button = tk.Button(text="Click and Quit", command=root.quit, background='#69be28', fg='white', cursor="heart")
     button.pack()
 
