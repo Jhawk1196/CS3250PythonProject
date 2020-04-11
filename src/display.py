@@ -3,10 +3,10 @@ import tkinter as tk
 from src.parser import parse_url_feed
 from src import fontSelect
 from tkinter import font
-from tkinter import Text
 
 
-def displayView(args):
+def display(args):
+    #Stashed changes
     if args.url is not None:
         feed = parse_url_feed(args.url)
     elif args.file is not None:
@@ -15,14 +15,19 @@ def displayView(args):
         #feed = parse_url_feed(config file url_list)
     else:
         feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
-
+    feed = str(feed)
+    feed = [item.replace(",", "\n•") for item in feed]
     root = Tk()
+    #Updated upstream
     menubar = Menu(root)
     var = StringVar()
     customfont= font.Font(family='Helvetica', size=12)
-    label = Message(root, textvariable=var, font=customfont, fg='black')  # relief=RAISED
+    label = Message(root, textvariable=var, font=customfont, fg='black', cursor="pirate")  # relief=RAISED
+    label.configure(background='black', fg='white', cursor="pirate")
     var.set(feed)
+
     window_text = var.get()
+
 
     root.geometry("1000x500")
 
@@ -55,7 +60,16 @@ def displayView(args):
     fontcolor.add_command(label="Green", command=lambda: [fontSelect.fontColor(label, 'green'), root.update()])
     menubar.add_cascade(label="Font Color", menu=fontcolor)
 
-    button = tk.Button(text="Click and Quit", command=root.quit)
+    gui_color = Menu(menubar)
+    gui_color.add_command(label="Black", command=lambda: [label.configure(background= 'black'), root.update()])
+    gui_color.add_command(label="White", command=lambda: [label.configure(background= 'white'), root.update()])
+    gui_color.add_command(label="Red", command=lambda: [label.configure(background= 'red'), root.update()])
+    gui_color.add_command(label="Blue", command=lambda: [label.configure(background= 'blue'), root.update()])
+    gui_color.add_command(label="Green", command=lambda: [label.configure(background= 'green'), root.update()])
+    menubar.add_cascade(label="GUI Background Color", menu=gui_color)
+
+    root.configure(background='black')
+    button = tk.Button(text="Click and Quit", command=root.quit, background='#69be28', fg='white', cursor="heart")
     button.pack()
 
     root.config(menu=menubar)
@@ -63,12 +77,3 @@ def displayView(args):
     root.mainloop()
 
     return window_text
-
-
-"""
-while display is not quitting:
-    while list is not finished:
-        iterate through the list
-    if the list does end:
-        update the list
-"""

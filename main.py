@@ -1,4 +1,8 @@
-from src.display import displayView
+
+#from src.display import displayView
+
+from src.display import display
+
 from src.argument_parser import parse_args
 
 args = parse_args()
@@ -9,4 +13,5 @@ args = parse_args()
 # https://www.foxnews.com/politics.html
 # http://feeds.feedburner.com/ign/all
 
-displayView(args)
+
+display(args)
