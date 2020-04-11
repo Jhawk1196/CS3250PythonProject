@@ -3,6 +3,12 @@ import requests
 import re
 import lxml
 
+"""
+Okay so below you will see a bunch of for loops that are nested within each other.
+Now, you might think that that provides a problem, because 3 nested for loops are O(n^3), 
+but the way RSS feeds work means that technically this is just a O(n) algorithm
+"""
+
 
 def parse_url_feed(url):
     feed = []
@@ -15,16 +21,24 @@ def parse_url_feed(url):
     for url_entry in url_list:
         if not check_url(url_entry):
             return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml"
+        parse_value = find_parser(url_entry)
         response = requests.get(url_entry)
-        parse_value = find_parser(response)
         soup = BeautifulSoup(response.content, parse_value)
-        # print(soup.prettify())
+        print(soup.prettify())
         if soup.rss is not None:
             tag = soup.rss
             tag = tag.channel
-            for title in tag.find_all(re.compile("title")):
-                for entry in title.find_all(string=True):
-                    feed.append(entry)
+            channel_dict = {"RSS_String": tag.title.string, "Link": tag.link.string}
+            feed.append(channel_dict)
+            for item in tag.find_all(re.compile("item")):
+                feed_dict = {}
+                for title in item.find_all(re.compile("title")):
+                    for entry in title.find_all(string=True):
+                        feed_dict["RSS_String"] = entry
+                for link in item.find_all(re.compile("link")):
+                    for entry in link.find_all(string=True):
+                        feed_dict["Link"] = entry
+                feed.append(feed_dict)
         elif soup.find_all(re.compile("atom")) is not None:
             tag = soup.feed
             for entry in tag.find_all("entry"):
@@ -57,8 +71,9 @@ def check_url(url):
 
 
 def find_parser(response):
-    test_url = response.url
-    test_string = (test_url[-3] + test_url[-2] + test_url[-1])
+    if len(response) <= 3:
+        return "Invalid URL Length"
+    test_string = (response[-3] + response[-2] + response[-1])
     if test_string == "tml":
         return "lxml"
     else:
@@ -67,6 +82,8 @@ def find_parser(response):
 
 def fix_feed(feed):
     end_feed = []
+    if len(feed) is None or len(feed) <= 0:
+        return "ERROR: FEED IS EMPTY"
     for i in range(len(feed)):
         if i == 0:
             end_feed.append(feed[i])
