@@ -24,7 +24,7 @@ def parse_url_feed(url):
         parse_value = find_parser(url_entry)
         response = requests.get(url_entry)
         soup = BeautifulSoup(response.content, parse_value)
-        print(soup.prettify())
+        # print(soup.prettify())
         if soup.rss is not None:
             tag = soup.rss
             tag = tag.channel
