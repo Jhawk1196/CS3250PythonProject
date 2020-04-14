@@ -1,0 +1,22 @@
+import unittest
+from tkinter import *
+from src import fontSelect
+from tkinter import font
+
+
+class testFontSelect(unittest.TestCase):
+
+    def testFontStyle(self):
+        customfont = font.Font(family='Helvetica', size=12)
+        fontSelect.fontStyle(customfont, 'Times')
+        self.assertEqual('Times', customfont.cget())
+
+    def testFontSize(self):
+        customfont = font.Font(family='Helvetica', size =12)
+        fontSelect.fontSize((customfont, 16))
+        self.assertEqual(16, customfont.cget(customfont, size))
+
+    def testFontColor(self):
+        label = Message(fg='Red')
+        fontSelect.fontColor(label, 'Black')
+        self.assertEqual(label.cget(label, fg), 'Black')
