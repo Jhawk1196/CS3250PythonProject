@@ -23,10 +23,6 @@ class TestURLCheck(unittest.TestCase):
     def test_URL_Check_rss(self):
         self.assertTrue(parser.check_url('testingrss'))
 
-    def test_ParseURLFeed_false(self):
-        self.assertEqual(parser.parse_url_feed('randomwords'),
-                         "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml")
-
     def test_URL_Check_incompat(self):
         self.assertFalse(parser.check_url('nevergonnagiveyouup'))
 
@@ -61,3 +57,16 @@ class TestFixFeed(unittest.TestCase):
         feed = [["Hello World", "What a Wonderful Day"], ["Hello World", "What a Wonderful Day"]]
         fixed_feed = [["Hello World", "What a Wonderful Day"]]
         self.assertEqual(parser.fix_feed(feed), fixed_feed)
+
+
+class TestParseUrl(unittest.TestCase):
+    def test_parse_goodURL(self):
+        self.assertIsNot(parser.parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss"), "Invalid URL. Must Be a "
+                                                                                              "RSS Feed URL ending in"
+                                                                                              " .rss, .html, or .xml")
+
+    def test_parse_notNone(self):
+        self.assertIsNotNone(parser.parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss"))
+
+    def test_parse_badURL(self):
+        self.assertEqual(parser.parse_url_feed("http://bad.url.notcorrect"), "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml")
