@@ -23,7 +23,6 @@ def parse_url_feed(url):
         parse_value = find_parser(url_entry)
         response = requests.get(url_entry)
         soup = BeautifulSoup(response.content, parse_value)
-        # print(soup.prettify())
         if soup.rss is not None:
             feed = []
             tag = soup.rss
