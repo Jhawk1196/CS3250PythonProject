@@ -45,7 +45,6 @@ def parse_url_feed(url):
             tag = soup.feed
             for entry in tag.find_all("entry"):
                 feed_dict = {}
-
                 for title in entry.find_all("title"):
                     for string in title.find_all(string=True):
                         feed_dict["RSS_String"] = string
