@@ -11,7 +11,6 @@ but the way RSS feeds work means that technically this is just a O(n) algorithm
 
 
 def parse_url_feed(url):
-    feed = []
     total_feed = []
     url_list = []
     if isinstance(url, str):
@@ -20,12 +19,13 @@ def parse_url_feed(url):
         url_list = url
     for url_entry in url_list:
         if not check_url(url_entry):
-            return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml"
+            return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml: " + url_entry
         parse_value = find_parser(url_entry)
         response = requests.get(url_entry)
         soup = BeautifulSoup(response.content, parse_value)
         # print(soup.prettify())
         if soup.rss is not None:
+            feed = []
             tag = soup.rss
             tag = tag.channel
             channel_dict = {"RSS_String": tag.title.string, "Link": tag.link.string}
@@ -39,14 +39,24 @@ def parse_url_feed(url):
                     for entry in link.find_all(string=True):
                         feed_dict["Link"] = entry
                 feed.append(feed_dict)
+            feed = fix_feed(feed)
+            total_feed.append(feed)
         elif soup.find_all(re.compile("atom")) is not None:
+            feed = []
             tag = soup.feed
             for entry in tag.find_all("entry"):
+                feed_dict = {}
+
                 for title in entry.find_all("title"):
                     for string in title.find_all(string=True):
-                        feed.append(string)
-        feed = fix_feed(feed)
-        total_feed = feed
+                        feed_dict["RSS_String"] = string
+                for link in entry.find_all(re.compile("link")):
+                    feed_dict["Link"] = link.get('href')
+                feed.append(feed_dict)
+            feed = fix_feed(feed)
+            total_feed.append(feed)
+    if len(total_feed) == 1:
+        total_feed = total_feed[0]
     return total_feed
 
 
