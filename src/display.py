@@ -6,13 +6,13 @@ from tkinter import font
 
 
 def display(args):
-    #Stashed changes
+    # Stashed changes
     if args.url is not None:
         feed = parse_url_feed(args.url)
     elif args.file is not None:
         feed = parse_url_feed(args.file)
-    #elif config file is not empty
-        #feed = parse_url_feed(config file url_list)
+    # elif config file is not empty
+        # feed = parse_url_feed(config file url_list)
     else:
         feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
     feed = str(feed)
@@ -21,16 +21,15 @@ def display(args):
     root = Tk()
     root.title("Team Woo")
 
-    #Updated upstream
+    # Updated upstream
     menubar = Menu(root)
     var = StringVar()
-    customfont= font.Font(family='Helvetica', size=12)
+    customfont = font.Font(family='Helvetica', size=12)
     label = Message(root, textvariable=var, font=customfont, fg='black', cursor="pirate")  # relief=RAISED
     label.configure(background='black', fg='white', cursor="pirate")
     var.set(feed)
 
     window_text = var.get()
-
 
     root.geometry("1000x500")
 
@@ -64,11 +63,11 @@ def display(args):
     menubar.add_cascade(label="Font Color", menu=fontcolor)
 
     gui_color = Menu(menubar)
-    gui_color.add_command(label="Black", command=lambda: [label.configure(background= 'black'), root.update()])
-    gui_color.add_command(label="White", command=lambda: [label.configure(background= 'white'), root.update()])
-    gui_color.add_command(label="Red", command=lambda: [label.configure(background= 'red'), root.update()])
-    gui_color.add_command(label="Blue", command=lambda: [label.configure(background= 'blue'), root.update()])
-    gui_color.add_command(label="Green", command=lambda: [label.configure(background= 'green'), root.update()])
+    gui_color.add_command(label="Black", command=lambda: [label.configure(background='black'), root.update()])
+    gui_color.add_command(label="White", command=lambda: [label.configure(background='white'), root.update()])
+    gui_color.add_command(label="Red", command=lambda: [label.configure(background='red'), root.update()])
+    gui_color.add_command(label="Blue", command=lambda: [label.configure(background='blue'), root.update()])
+    gui_color.add_command(label="Green", command=lambda: [label.configure(background='green'), root.update()])
     menubar.add_cascade(label="GUI Background Color", menu=gui_color)
 
     root.configure(background='#a5acaf')

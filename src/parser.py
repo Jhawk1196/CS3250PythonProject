@@ -46,7 +46,7 @@ def parse_url_feed(url):
                     for string in title.find_all(string=True):
                         feed.append(string)
         feed = fix_feed(feed)
-        total_feed.append(feed)
+        total_feed = feed
     return total_feed
 
 
