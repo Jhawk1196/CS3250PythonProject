@@ -26,6 +26,9 @@ class TestURLCheck(unittest.TestCase):
     def test_URL_Check_incompat(self):
         self.assertFalse(parser.check_url('nevergonnagiveyouup'))
 
+    def test_URL_Check_FeedBurner(self):
+        self.assertTrue(parser.check_url("http://feeds.feedburner.com/ign/all"))
+
 
 class TestFindParser(unittest.TestCase):
     def test_find_parser_isXML(self):
