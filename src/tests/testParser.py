@@ -63,10 +63,26 @@ class TestParseUrl(unittest.TestCase):
     def test_parse_goodURL(self):
         self.assertIsNot(parser.parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss"), "Invalid URL. Must Be a "
                                                                                               "RSS Feed URL ending in"
-                                                                                              " .rss, .html, or .xml")
+                                                                                              ".rss, .html, or .xml: "
+                                                                                              "http://rss.cnn.com/rss"
+                                                                                              "/cnn_allpolitics.rss")
 
     def test_parse_notNone(self):
         self.assertIsNotNone(parser.parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss"))
 
     def test_parse_badURL(self):
-        self.assertEqual(parser.parse_url_feed("http://bad.url.notcorrect"), "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml")
+        self.assertEqual(parser.parse_url_feed("http://bad.url.notcorrect"), "Invalid URL. Must Be a RSS Feed URL "
+                                                                             "ending in .rss, .html, "
+                                                                             "or .xml: http://bad.url.notcorrect")
+
+    def test_parse_returnsURLList(self):
+        url_list = ["http://rss.cnn.com/rss/cnn_allpolitics.rss", "https://xkcd.com/atom.xml",
+                    "http://feeds.feedburner.com/ign/all"]
+        self.assertIsNotNone(parser.parse_url_feed(url_list))
+
+    def test_parse_URLListHasBadURL(self):
+        url_list = ["http://rss.cnn.com/rss/cnn_allpolitics.rss", "http://bad.url.notcorrect",
+                    "https://xkcd.com/atom.xml", "http://feeds.feedburner.com/ign/all"]
+        self.assertEqual(parser.parse_url_feed(url_list), "Invalid URL. Must Be a RSS Feed URL "
+                                                          "ending in .rss, .html, "
+                                                          "or .xml: http://bad.url.notcorrect")
