@@ -1,8 +1,9 @@
-from tkinter import *
 import tkinter as tk
-from src.parser import parse_url_feed
-from src import fontSelect
+from tkinter import *
 from tkinter import font
+
+from src import fontSelect
+from src.parser import parse_url_feed
 
 
 def display(args):
@@ -31,7 +32,7 @@ def display(args):
 
     window_text = var.get()
 
-    root.geometry("1000x500")
+    root.geometry("")
 
     fontmenu = Menu(menubar)
     fontmenu.add_command(label="Times New Roman",
@@ -75,7 +76,7 @@ def display(args):
     button.pack()
 
     root.config(menu=menubar)
-    label.pack()
+    label.pack(fill=tk.BOTH, expand=True)
     root.mainloop()
 
     return window_text

@@ -1,9 +1,8 @@
 
 #from src.display import displayView
 
-from src.display import display
-
 from src.argument_parser import parse_args
+from src.display import display
 
 args = parse_args()
 # print(f"file is: {args.file}")
