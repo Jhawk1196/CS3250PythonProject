@@ -16,21 +16,23 @@ def display(args):
         # feed = parse_url_feed(config file url_list)
     else:
         feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
-    feed = str(feed)
-    feed = feed.split()
-    feed = [item.replace(",", "\n\n•") for item in feed]
+    #feed = str(feed)
+    #feed = feed.split()
+    #feed = [item.replace(",", "\n\n•") for item in feed]
     root = Tk()
     root.title("Team Woo")
 
     # Updated upstream
     menubar = Menu(root)
     var = StringVar()
+    #for x in feed:
+    #var = feed
     customfont = font.Font(family='Helvetica', size=12)
     label = Message(root, textvariable=var, font=customfont, fg='black', cursor="pirate")  # relief=RAISED
     label.configure(background='black', fg='white', cursor="pirate")
     var.set(feed)
 
-    window_text = var.get()
+    window_text = args  #.get()
 
     root.geometry("")
 
