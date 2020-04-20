@@ -1,0 +1,4 @@
+font_size: 15
+font_color: 'black'
+background_color: 'white'
+urls: 'http://rss.cnn.com/rss/cnn_allpolitics.rss'
