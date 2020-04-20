@@ -82,4 +82,3 @@ def display(args):
     root.mainloop()
 
     return window_text
-_
