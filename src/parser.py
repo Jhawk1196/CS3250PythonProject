@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+import typing
 import lxml
 
 """
@@ -10,13 +11,13 @@ but the way RSS feeds work means that technically this is just a O(n) algorithm
 """
 
 
-def parse_url_feed(url):
+def parse_url_feed(incoming) -> typing.Union[list, str]:
     total_feed = []
     url_list = []
-    if isinstance(url, str):
-        url_list.append(url)
-    elif isinstance(url, list):
-        url_list = url
+    if isinstance(incoming, str):
+        url_list.append(incoming)
+    elif isinstance(incoming, list):
+        url_list = incoming
     for url_entry in url_list:
         if not check_url(url_entry):
             return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml: " + url_entry
@@ -53,12 +54,12 @@ def parse_url_feed(url):
                 feed.append(feed_dict)
             feed = fix_feed(feed)
             total_feed.append(feed)
-    if len(total_feed) == 1:
-        total_feed = total_feed[0]
+    #if len(total_feed) == 1:
+        #total_feed = total_feed[0]
     return total_feed
 
 
-def check_url(url):
+def check_url(url: str):
     url = str(url)
     if len(url) == 0:
         return False
@@ -78,7 +79,7 @@ def check_url(url):
         return False
 
 
-def find_parser(response):
+def find_parser(response: str) -> str:
     if len(response) <= 3:
         return "Invalid URL Length"
     test_string = (response[-3] + response[-2] + response[-1])
@@ -88,7 +89,7 @@ def find_parser(response):
         return "lxml-xml"
 
 
-def fix_feed(feed):
+def fix_feed(feed: list) -> typing.Union[str, list]:
     end_feed = []
     if len(feed) is None or len(feed) <= 0:
         return "ERROR: FEED IS EMPTY"
