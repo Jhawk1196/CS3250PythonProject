@@ -1,38 +1,30 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import font
+import webbrowser
+import time
 
 from src import fontSelect
 from src.parser import parse_url_feed
 
 
 def display(args):
-    # Stashed changes
-    if args.url is not None:
-        feed = parse_url_feed(args.url)
-    elif args.file is not None:
-        feed = parse_url_feed(args.file)
-    # elif config file is not empty
-        # feed = parse_url_feed(config file url_list)
-    else:
-        feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
-    #feed = str(feed)
-    #feed = feed.split()
-    #feed = [item.replace(",", "\n\n•") for item in feed]
     root = Tk()
     root.title("Team Woo")
 
+    feed = update_feed(args)
+    var_title = StringVar()
+    var_link = StringVar()
+    var_title.set(feed)
+    customfont = font.Font(family='Helvetica', size=12)
+    label = Message(root, textvariable=var_title, font=customfont, fg='black', cursor="pirate")  # relief=RAISED
+    label.pack(fill=tk.BOTH, expand=True)
+    label.bind("<Button-1>", lambda e: callback("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+    label.configure(background='black', fg='white', cursor="pirate")
+
     # Updated upstream
     menubar = Menu(root)
-    var = StringVar()
-    #for x in feed:
-    #var = feed
-    customfont = font.Font(family='Helvetica', size=12)
-    label = Message(root, textvariable=var, font=customfont, fg='black', cursor="pirate")  # relief=RAISED
-    label.configure(background='black', fg='white', cursor="pirate")
-    var.set(feed)
-
-    window_text = args  #.get()
+    window_text = args  # .get()
 
     root.geometry("")
 
@@ -78,7 +70,24 @@ def display(args):
     button.pack()
 
     root.config(menu=menubar)
-    label.pack(fill=tk.BOTH, expand=True)
+
     root.mainloop()
 
     return window_text
+
+
+def callback(url: str):
+    webbrowser.open_new(url)
+
+
+def update_feed(args):
+    # Stashed changes
+    if args.url is not None:
+        feed = parse_url_feed(args.url)
+    elif args.file is not None:
+        feed = parse_url_feed(args.file)
+    # elif config file is not empty
+    # feed = parse_url_feed(config file url_list)
+    else:
+        feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
+    return feed
