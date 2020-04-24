@@ -9,7 +9,7 @@ def parse_args():
     parser.add_argument('--file', dest='file', action='store', default=None,
                         help="enter a file name to parse", nargs='*')
     parser.add_argument('--config', dest='config', action='store', default='',
-                        help ="optionally enter a .yaml config file", nargs='*')
+                        help="optionally enter a .yaml config file", nargs='*')
     args = parser.parse_args()
     return args
 

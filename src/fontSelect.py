@@ -1,13 +1,13 @@
-def fontStyle(customfont, font):
-    customfont.config(family=font)
-    return customfont
+def font_style(custom_font, font):
+    custom_font.config(family=font)
+    return custom_font
 
 
-def fontSize(customfont, fsize):
-    customfont.config(size=fsize)
-    return customfont
+def font_size(custom_font, fsize):
+    custom_font.config(size=fsize)
+    return custom_font
 
 
-def fontColor(label, fcolor):
+def font_color(label, fcolor):
     label.config(fg=fcolor)
     return label

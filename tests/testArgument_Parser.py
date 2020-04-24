@@ -3,7 +3,8 @@ from mock import Mock
 import sys
 import src.argument_parser as argument_parser
 
-class test_URL(unittest.TestCase):
+
+class TestURL(unittest.TestCase):
     def test_single_url(self):
         sys.argv[1:] = ["--url", "google.com"]
         args = argument_parser.parse_args()
@@ -38,4 +39,3 @@ class test_URL(unittest.TestCase):
         self.assertEqual(args.url, ['google.com', "duckduckgo.com"])
         self.assertEqual(args.file, ["some_file.json", "another_file.json"])
         self.assertEqual(args.config, "")
-
