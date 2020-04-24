@@ -14,7 +14,7 @@ before_install:
   - pip install coverage
 
 script:
-  - coverage run -m unittest
+  - coverage run --source=./ -m unittest
   - coverage report
   - sonar-scanner
 
