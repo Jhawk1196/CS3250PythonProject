@@ -2,7 +2,6 @@ import unittest
 from tkinter import *
 import src.fontSelect as fontSelect
 from tkinter import font
-from os import environ
 from mock import Mock, patch, MagicMock
 
 
@@ -23,7 +22,7 @@ class test_fontStyle(unittest.TestCase):
         fontSelect.font_size(custom, 18)
         self.assertEqual(custom.cget('size'), 18)
 
-    def testFontColor(self):
+    def test_fontColor(self):
         root = Tk()
         label = Message(root, fg='Red')
         label.pack()
