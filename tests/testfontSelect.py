@@ -16,16 +16,16 @@ class testFontSelect(unittest.TestCase):
 
         root = Tk()
         customfont = font.Font(root, family='Helvetica')
-        fontSelect.fontStyle(customfont, 'Times')
+        fontSelect.font_style(customfont, 'Times')
         self.assertEqual('Times', customfont.cget('family'))
 
     def testFontSize(self):
         root = Tk()
         customfont = font.Font(root, family='Helvetica', size=12)
-        self.assertEqual(16, fontSelect.fontSize(customfont, 16).cget("size"))
+        self.assertEqual(16, fontSelect.font_size(customfont, 16).cget("size"))
 
     def testFontColor(self):
         root = Tk()
         label = Message(root, fg='Red')
         label.pack()
-        self.assertEqual('Black', fontSelect.fontColor(label, 'Black').cget("fg"))
+        self.assertEqual('Black', fontSelect.font_color(label, 'Black').cget("fg"))
