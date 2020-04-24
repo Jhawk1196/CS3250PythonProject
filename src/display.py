@@ -9,11 +9,19 @@ from src.parser import parse_url_feed
 def display(args):  # pragma: no cover
     root = Tk()
     root.title("Harry Parser and the Sorcerer's Feed's")
-
+    cycle = 5000
     # Updated upstream
     menubar = Menu(root)
 
     root.geometry("")
+
+    cycle_menu = Menu(menubar)
+    cycle_menu.add_command(label="5 sec", command=lambda: [update_cycle(cycle, 5000), root.update_idletasks()])
+    cycle_menu.add_command(label="10 sec", command=lambda: [update_cycle(cycle, 10000), root.update_idletasks()])
+    cycle_menu.add_command(label="15 sec", command=lambda: [update_cycle(cycle, 15000), root.update_idletasks()])
+    cycle_menu.add_command(label="30 sec", command=lambda: [update_cycle(cycle, 30000), root.update_idletasks()])
+    cycle_menu.add_command(label="1 min", command=lambda: [update_cycle(cycle, 60000), root.update_idletasks()])
+    menubar.add_cascade(label="Cycle Time", menu=cycle_menu)
 
     font_menu = Menu(menubar)
     font_menu.add_command(label="Times New Roman",
@@ -64,8 +72,8 @@ def display(args):  # pragma: no cover
     menubar.add_cascade(label="GUI Background Color", menu=gui_color)
 
     root.configure(background='black')
-    #button = tk.Button(text="Click and Quit", command=root.quit, background='#69be28', fg='white', cursor="heart")
-    #button.pack()
+    # button = tk.Button(text="Click and Quit", command=root.quit, background='#69be28', fg='white', cursor="heart")
+    # button.pack()
     root.config(menu=menubar)
     custom_font = font.Font(family='Helvetica', size=12)
     label = Message(root, font=custom_font, fg='white', cursor="pirate", width=800, background='black', padx=10,
@@ -99,7 +107,7 @@ def display(args):  # pragma: no cover
         label.bind("<Button-1>", lambda e: callback(temp_dict["Link"]))
         root.update_idletasks()
         root.update()
-        root.after(5000, label.pack_forget())
+        root.after(cycle, label.pack_forget())
 
 
 def callback(url: str):  # pragma: no cover
@@ -112,8 +120,17 @@ def update_feed(args):  # pragma: no cover
         feed = parse_url_feed(args.url)
     elif args.file is not None:
         feed = parse_url_feed(args.file)
-    #elif open('default_config.yml') is not None:
+    # elif open('default_config.yml') is not None:
     #    feed = parse_url_feed(config file url_list)
     else:
         feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
     return feed
+
+
+def update_cycle(cycle, new_time):
+    cycle = new_time
+    return cycle
+
+
+def get_cycle(cycle):
+    return cycle
