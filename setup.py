@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(
-    name='PlaceholderName',
+    name='Harry Parser',
     version='0.1',
     packages=[open('requirements.txt').read()],
     license='MIT License',

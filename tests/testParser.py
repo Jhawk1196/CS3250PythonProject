@@ -41,27 +41,6 @@ class TestFindParser(unittest.TestCase):
         self.assertEqual(parser.find_parser(""), "Invalid URL Length")
 
 
-class TestFixFeed(unittest.TestCase):
-    def test_fix_feed_isEmpty(self):
-        feed = []
-        self.assertEqual(parser.fix_feed(feed), "ERROR: FEED IS EMPTY")
-
-    def test_fix_feed_isString(self):
-        feed = ["Hello", "Hello"]
-        fixed_feed = ["Hello"]
-        self.assertEqual(parser.fix_feed(feed), fixed_feed)
-
-    def test_fix_feed_isDict(self):
-        feed = [{"Hello": "World"}, {"Hello": "World"}, {"Wonderful": "Day"}]
-        fixed_feed = [{"Hello": "World"}, {"Wonderful": "Day"}]
-        self.assertEqual(parser.fix_feed(feed), fixed_feed)
-
-    def test_fix_feed_isList(self):
-        feed = [["Hello World", "What a Wonderful Day"], ["Hello World", "What a Wonderful Day"]]
-        fixed_feed = [["Hello World", "What a Wonderful Day"]]
-        self.assertEqual(parser.fix_feed(feed), fixed_feed)
-
-
 class TestParseUrl(unittest.TestCase):
     def test_parse_goodURL(self):
         self.assertIsNot(parser.parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss"), "Invalid URL. Must Be a "
