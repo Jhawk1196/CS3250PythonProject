@@ -10,7 +10,7 @@ class testFontSelect(unittest.TestCase):
 
     def testFontStyle(self):
         root = Tk()
-        customfont = font.Font(family= 'Helvetica')
+        customfont = font.Font(root=root, family= 'Helvetica')
         fontSelect.fontStyle(customfont, 'Times')
         self.assertEqual('Times', customfont.cget('family'))
 
