@@ -73,15 +73,17 @@ def check_url(url: str) -> bool:
         return False
     test_string = (url[-3] + url[-2] + url[-1])
     second_test_string = ""
-    if len(url) > 11:
+    https_test_string = ""
+    if len(url) > 12:
         second_test_string = (url[7] + url[8] + url[9] + url[10] + url[11])
+        https_test_string = (url[8] + url[9] + url[10] + url[11] + url[12])
     if test_string == "rss":
         return True
     elif test_string == "xml":
         return True
     elif test_string == "tml":
         return True
-    elif second_test_string == "feeds":
+    elif second_test_string == "feeds" or https_test_string == "feeds":
         return True
     else:
         return False

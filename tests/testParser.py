@@ -37,6 +37,9 @@ class TestURLCheck(unittest.TestCase):
     def test_URL_Check_FeedBurner(self):
         self.assertTrue(parser.check_url("http://feeds.feedburner.com/ign/all"))
 
+    def test_URL_Check_Safe_FeedBurner(self):
+        self.assertTrue(parser.check_url("https://feeds.feedburner.com/ign/all"))
+
 
 class TestFindParser(unittest.TestCase):
     def test_find_parser_isXML(self):
