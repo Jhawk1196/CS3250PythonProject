@@ -38,7 +38,8 @@ class TestFindParser(unittest.TestCase):
         self.assertEqual(parser.find_parser("sdasjhdadhausudhaudajdstml"), "lxml")
 
     def test_find_parser_isEmpty(self):
-        self.assertEqual(parser.find_parser(""), "Invalid URL Length")
+        with self.assertRaises(expected_exception=Exception):
+            parser.find_parser("")
 
 
 class TestParseUrl(unittest.TestCase):
