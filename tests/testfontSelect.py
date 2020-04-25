@@ -20,7 +20,8 @@ class TestFontStyle(unittest.TestCase):
         self.assertEqual(custom.cget('family'), 'Helvetica')
         fontSelect.font_style(custom, 'Times')
         self.assertEqual(custom.cget('family'), 'Times')
-
+        fontSelect.font_size(custom, 18)
+        self.assertEqual(custom.cget('size'), 18)
 
     def test_fontColor(self):
         root = Tk()
