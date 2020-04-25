@@ -9,7 +9,7 @@ from src.gui_config import Configuration  # pragma: no cover
 
 def display(args):  # pragma: no cover
     root = Tk()
-    root.title("Harry Parser and the Sorcerer's Feed's")
+    root.title("Harry Parser and the Sorcerer's Feeds")
     go = BooleanVar()
     go.set(True)
 
