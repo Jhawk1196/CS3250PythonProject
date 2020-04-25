@@ -2,29 +2,27 @@ import unittest
 from tkinter import *
 import src.fontSelect as fontSelect
 from tkinter import font
-import os
-from src import display
 from mock import Mock, patch, MagicMock
 
 
-class testFontSelect(unittest.TestCase):
-
-    def testFontStyle(self):
-        if os.environ.get('DISPLAY', '') == '':
-            print('no display found. Using :0.0')
-            os.environ.__setitem__('DISPLAY', ':0.0')
-
+class TestFontStyle(unittest.TestCase):
+    @patch('tkinter.font.Font', autospec=True)
+    def test_calls_config(self, mock_font):
         root = Tk()
-        customfont = font.Font(root, family='Helvetica')
-        fontSelect.font_style(customfont, 'Times')
-        self.assertEqual('Times', customfont.cget('family'))
+        custom = mock_font(root, family='Helvetica', size=12)
+        fontSelect.font_style(custom, 'Times')
+        custom.config.assert_called_with(family='Times')
 
-    def testFontSize(self):
+    def test_configs_font(self):
         root = Tk()
-        customfont = font.Font(root, family='Helvetica', size=12)
-        self.assertEqual(16, fontSelect.font_size(customfont, 16).cget("size"))
+        custom = font.Font(root, family='Helvetica', size=12)
+        self.assertEqual(custom.cget('family'), 'Helvetica')
+        fontSelect.font_style(custom, 'Times')
+        self.assertEqual(custom.cget('family'), 'Times')
+        fontSelect.font_size(custom, 18)
+        self.assertEqual(custom.cget('size'), 18)
 
-    def testFontColor(self):
+    def test_fontColor(self):
         root = Tk()
         label = Message(root, fg='Red')
         label.pack()
