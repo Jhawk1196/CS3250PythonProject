@@ -93,7 +93,7 @@ def return_list(incoming) -> list:
     return url_list
 
 
-def rss_parse(soup: BeautifulSoup) -> LinkedList:
+def rss_parse(soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
     feed = LinkedList()
     tag = soup.rss
     tag = tag.channel
@@ -111,7 +111,7 @@ def rss_parse(soup: BeautifulSoup) -> LinkedList:
     return feed
 
 
-def atom_parse(soup: BeautifulSoup) -> LinkedList:
+def atom_parse(soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
     feed = LinkedList()
     tag = soup.feed
     for entry in tag.find_all("entry"):
