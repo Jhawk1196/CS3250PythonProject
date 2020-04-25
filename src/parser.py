@@ -4,12 +4,6 @@ import re
 import typing
 import lxml
 
-"""
-Okay so below you will see a bunch of for loops that are nested within each other.
-Now, you might think that that provides a problem, because 3 nested for loops are O(n^3), 
-but the way RSS feeds work means that technically this is just a O(n) algorithm
-"""
-
 
 class Node:  # pragma: no cover
     def __init__(self, data):
