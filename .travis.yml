@@ -17,6 +17,7 @@ script:
   - coverage run --source=./ -m unittest
   - coverage report
   - sonar-scanner
+  - sonar.python.coverage.reportPaths
 
 after_success:
   - coveralls
