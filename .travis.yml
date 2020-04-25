@@ -15,7 +15,7 @@ before_install:
 
 script:
   - coverage run --source=./ -m unittest
-  - coverage report -m coverage.xml
+  - coverage report -m
   - sonar-scanner
 
 after_success:
