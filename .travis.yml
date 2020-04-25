@@ -18,6 +18,7 @@ script:
   - coverage report -m
   - coverage xml -o coverage_file.xml
   - sonar-scanner
+  - xvbf-run make test
 
 after_success:
   - coveralls
