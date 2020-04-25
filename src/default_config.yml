@@ -1,10 +1,10 @@
 # This is poorly named. It's just here until I can get it mocked properly
 font_size: 15
-font_color: 'white'
+font_color: white
 time: 5000
-font_family: 'Helvetica'
-background_color: 'black'
+font_family: Helvetica
+background_color: black
 urls:
-  - "http://rss.cnn.com/rss/cnn_topstories.rss"
-  - "https://xkcd.com/atom.xml"
-  - "http://feeds.feedburner.com/ign/all"
+  - http://rss.cnn.com/rss/cnn_topstories.rss
+  - https://xkcd.com/atom.xml
+  - http://feeds.feedburner.com/ign/all

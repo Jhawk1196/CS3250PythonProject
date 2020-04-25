@@ -1,7 +1,3 @@
-"""
-This is very much a work in progress
-"""
-import atexit
 import yaml
 from src.argument_parser import parse_args
 import os
@@ -9,7 +5,6 @@ import os
 args = parse_args()
 
 
-# todone need config object
 class Configuration:
     def make_defaults(self):
         # defaults:
@@ -36,7 +31,7 @@ class Configuration:
                     break
                 elif entry.name == "default_config.yml":
                     use_this = entry
-                    break
+                    continue
                 else:
                     continue
 
@@ -80,10 +75,7 @@ class Configuration:
     def urls(self):
         return self.urls()
 
-    def save_configuration(config):
-        # can I just read the configuration elements from somewhere else?
-        pass
-
-# cf = Configuration(args)
-#
-# cf.print_configuration()
+    def save_configuration(self, save_info: dict):
+        save_info['urls'] = self.urls
+        with open('src/saved_config.yml', 'w') as file:
+            documents = yaml.dump(save_info, file)
