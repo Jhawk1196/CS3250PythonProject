@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import typing
-import lxml
 
 
 class Node:  # pragma: no cover
