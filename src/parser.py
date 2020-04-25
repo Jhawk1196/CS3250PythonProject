@@ -15,14 +15,12 @@ class Node:  # pragma: no cover
     def __init__(self, data):
         self.data = data
         self.next = None
-        return
 
 
 class LinkedList:  # pragma: no cover
     def __init__(self):
         self.head = None
         self.tail = None
-        return
 
     def add_list_item(self, item):
         if not isinstance(item, Node):
@@ -37,16 +35,10 @@ class LinkedList:  # pragma: no cover
 
         self.tail = item
 
-        return
-
 
 def parse_url_feed(incoming) -> typing.Union[list, str]:
     total_feed = LinkedList()
-    url_list = []
-    if isinstance(incoming, str):
-        url_list.append(incoming)
-    elif isinstance(incoming, list):
-        url_list = incoming
+    url_list = return_list(incoming)
     for url_entry in url_list:
         if not check_url(url_entry):
             raise Exception("Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml: " + url_entry)
@@ -54,32 +46,10 @@ def parse_url_feed(incoming) -> typing.Union[list, str]:
         response = requests.get(url_entry)
         soup = BeautifulSoup(response.content, parse_value)
         if soup.rss is not None:
-            feed = LinkedList()
-            tag = soup.rss
-            tag = tag.channel
-            channel_dict = {"RSS_String": tag.title.string, "Link": tag.link.string}
-            feed.add_list_item(channel_dict)
-            for item in tag.find_all(re.compile("item")):
-                feed_dict = {}
-                for title in item.find_all(re.compile("title")):
-                    for entry in title.find_all(string=True):
-                        feed_dict["RSS_String"] = entry
-                for link in item.find_all(re.compile("link")):
-                    for entry in link.find_all(string=True):
-                        feed_dict["Link"] = entry
-                feed.add_list_item(feed_dict)
+            feed = rss_parse(soup)
             total_feed.add_list_item(feed)
         elif soup.find_all(re.compile("atom.xml")) is not None:
-            feed = LinkedList()
-            tag = soup.feed
-            for entry in tag.find_all("entry"):
-                feed_dict = {}
-                for title in entry.find_all("title"):
-                    for string in title.find_all(string=True):
-                        feed_dict["RSS_String"] = string
-                for link in entry.find_all(re.compile("link")):
-                    feed_dict["Link"] = link.get('href')
-                feed.add_list_item(feed_dict)
+            feed = atom_parse(soup)
             total_feed.add_list_item(feed)
     return total_feed
 
@@ -112,3 +82,44 @@ def find_parser(response: str) -> str:
         return "lxml"
     else:
         return "lxml-xml"
+
+
+def return_list(incoming) -> list:
+    url_list = []
+    if isinstance(incoming, str):
+        url_list.append(incoming)
+    elif isinstance(incoming, list):
+        url_list = incoming
+    return url_list
+
+
+def rss_parse(soup: BeautifulSoup) -> LinkedList:
+    feed = LinkedList()
+    tag = soup.rss
+    tag = tag.channel
+    channel_dict = {"RSS_String": tag.title.string, "Link": tag.link.string}
+    feed.add_list_item(channel_dict)
+    for item in tag.find_all(re.compile("item")):
+        feed_dict = {}
+        for title in item.find_all(re.compile("title")):
+            for entry in title.find_all(string=True):
+                feed_dict["RSS_String"] = entry
+        for link in item.find_all(re.compile("link")):
+            for entry in link.find_all(string=True):
+                feed_dict["Link"] = entry
+        feed.add_list_item(feed_dict)
+    return feed
+
+
+def atom_parse(soup: BeautifulSoup) -> LinkedList:
+    feed = LinkedList()
+    tag = soup.feed
+    for entry in tag.find_all("entry"):
+        feed_dict = {}
+        for title in entry.find_all("title"):
+            for string in title.find_all(string=True):
+                feed_dict["RSS_String"] = string
+        for link in entry.find_all(re.compile("link")):
+            feed_dict["Link"] = link.get('href')
+        feed.add_list_item(feed_dict)
+    return feed

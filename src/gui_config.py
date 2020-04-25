@@ -31,7 +31,6 @@ class Configuration:
                     break
                 elif entry.name == "default_config.yml":
                     use_this = entry
-                    continue
                 else:
                     continue
 
@@ -64,18 +63,18 @@ class Configuration:
         print('urls:' + self.urls)
 
     def font_size(self):
-        return self.font_size()
+        return self.font_size
 
     def font_color(self):
-        return self.font_color()
+        return self.font_color
 
     def background_color(self):
-        return self.background_color()
+        return self.background_color
 
     def urls(self):
-        return self.urls()
+        return self.urls
 
     def save_configuration(self, save_info: dict):
         save_info['urls'] = self.urls
         with open('src/saved_config.yml', 'w') as file:
-            documents = yaml.dump(save_info, file)
+            yaml.dump(save_info, file)

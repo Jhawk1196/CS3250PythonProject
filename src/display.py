@@ -165,7 +165,7 @@ def update_feed(args, config):  # pragma: no cover
     return feed
 
 
-def save_values(config, time, size, color, background, family):
+def save_values(config, time, size, color, background, family): # pragma: no cover
     save_dict = {'time': time, 'font_size': size, 'font_color': color,
                  'background_color': background, 'font_family': family}
     config.save_configuration(save_dict)
