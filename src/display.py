@@ -10,6 +10,8 @@ def display(args):  # pragma: no cover
     root = Tk()
     root.title("Harry Parser and the Sorcerer's Feed's")
 
+    time_var = IntVar()
+    time_var.set(5000)
     # Updated upstream
     menubar = Menu(root)
 
@@ -63,6 +65,13 @@ def display(args):  # pragma: no cover
                                            root.update()])
     menubar.add_cascade(label="GUI Background Color", menu=gui_color)
 
+    time_menu = Menu(menubar)
+    time_menu.add_command(label="5 seconds", command=lambda: [time_var.set(5000), root.update()])
+    time_menu.add_command(label="10 seconds", command=lambda: [time_var.set(10000), root.update()])
+    time_menu.add_command(label="30 seconds", command=lambda: [time_var.set(30000), root.update()])
+    time_menu.add_command(label="60 seconds", command=lambda: [time_var.set(60000), root.update()])
+    menubar.add_cascade(label="View Time", menu=time_menu)
+
     root.configure(background='black')
     #button = tk.Button(text="Click and Quit", command=root.quit, background='#69be28', fg='white', cursor="heart")
     #button.pack()
@@ -99,7 +108,7 @@ def display(args):  # pragma: no cover
         label.bind("<Button-1>", lambda e: callback(temp_dict["Link"]))
         root.update_idletasks()
         root.update()
-        root.after(5000, label.pack_forget())
+        root.after(time_var.get(), label.pack_forget())
 
 
 def callback(url: str):  # pragma: no cover
