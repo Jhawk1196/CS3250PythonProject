@@ -1,10 +1,10 @@
-import tkinter as tk
-from tkinter import *
-from tkinter import font
-import webbrowser
-from src import fontSelect
-from src.parser import parse_url_feed
-from src.gui_config import Configuration
+import tkinter as tk  # pragma: no cover
+from tkinter import *  # pragma: no cover
+from tkinter import font  # pragma: no cover
+import webbrowser  # pragma: no cover
+from src import fontSelect  # pragma: no cover
+from src.parser import parse_url_feed  # pragma: no cover
+from src.gui_config import Configuration  # pragma: no cover
 
 
 def display(args):  # pragma: no cover

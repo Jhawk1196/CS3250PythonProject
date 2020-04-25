@@ -1,4 +1,4 @@
-from distutils.core import setup
+from distutils.core import setup  # pragma: no cover
 
 setup(
     name='Harry Parser',
