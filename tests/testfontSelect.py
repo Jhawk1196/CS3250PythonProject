@@ -6,6 +6,7 @@ from mock import Mock, patch, MagicMock
 
 
 class TestFontStyle(unittest.TestCase):
+
     @patch('tkinter.font.Font', autospec=True)
     def test_calls_config(self, mock_font):
         root = Tk()
