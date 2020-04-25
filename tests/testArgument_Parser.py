@@ -6,9 +6,10 @@ import src.argument_parser as argument_parser
 
 class TestURL(unittest.TestCase):
     def test_single_url(self):
-        sys.argv[1:] = ["--url", "google.com"]
+        test_check = "google.com"
+        sys.argv[1:] = ["--url", test_check]
         args = argument_parser.parse_args()
-        self.assertEqual(args.url, ['google.com'])
+        self.assertEqual(args.url, [test_check])
         self.assertEqual(args.file, None)
         self.assertEqual(args.config, "")
 
@@ -27,15 +28,21 @@ class TestURL(unittest.TestCase):
         self.assertEqual(args.file, None)
 
     def test_multiple_url(self):
-        sys.argv[1:] = ["--url", "google.com", "duckduckgo.com"]
+        test_check1 = "google.com"
+        test_check2 = "duckduckgo.com"
+        sys.argv[1:] = ["--url", test_check1, test_check2]
         args = argument_parser.parse_args()
-        self.assertEqual(args.url, ['google.com', "duckduckgo.com"])
+        self.assertEqual(args.url, [test_check1, test_check2])
         self.assertEqual(args.file, None)
         self.assertEqual(args.config, "")
 
     def test_urls_and_files(self):
-        sys.argv[1:] = ["--url", "google.com", "duckduckgo.com", "--file", "some_file.json", "another_file.json"]
+        url_check1 = "google.com"
+        url_check2 = "duckduckgo.com"
+        file_check1 = "some_file.json"
+        file_check2 = "another_file.json"
+        sys.argv[1:] = ["--url", url_check1, url_check2, "--file", file_check1, file_check2]
         args = argument_parser.parse_args()
-        self.assertEqual(args.url, ['google.com', "duckduckgo.com"])
-        self.assertEqual(args.file, ["some_file.json", "another_file.json"])
+        self.assertEqual(args.url, [url_check1, url_check2])
+        self.assertEqual(args.file, [file_check1, file_check2])
         self.assertEqual(args.config, "")

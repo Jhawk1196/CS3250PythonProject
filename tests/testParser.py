@@ -1,3 +1,8 @@
+"""
+testParser.py
+
+Used to test parser
+"""
 import unittest
 from mock import Mock
 import sys

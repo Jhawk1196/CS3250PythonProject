@@ -1,21 +1,39 @@
+"""
+Parser.py
+
+Used to parse URLs into a linked list of dictionaries.
+"""
+
 from bs4 import BeautifulSoup
 import requests
 import re
-import typing
 
 
 class Node:  # pragma: no cover
+    """
+    Creates a Node that contains data, and a next node
+    Data holds any object.
+    Next points to the next node, and should always be a node.
+    """
     def __init__(self, data):
+        """Initialize Node Class"""
         self.data = data
         self.next = None
 
 
 class LinkedList:  # pragma: no cover
+    """
+    Creates a Linked List, with a head, and a tail.
+    Head only contains the first link in the list, and should be called at the beginning of scan.
+    Tail only contains the last link in the list, and should not be called.
+    """
     def __init__(self):
+        """Initialize Linked List Class"""
         self.head = None
         self.tail = None
 
     def add_list_item(self, item):
+        """Add an item to the Linked List"""
         if not isinstance(item, Node):
             item = Node(item)
 
@@ -29,7 +47,8 @@ class LinkedList:  # pragma: no cover
         self.tail = item
 
 
-def parse_url_feed(incoming) -> typing.Union[list, str]:
+def parse_url_feed(incoming) -> LinkedList:
+    """Receives either a list of URLs or a single URL, and returns a Linked List of Dictionaries"""
     total_feed = LinkedList()
     url_list = return_list(incoming)
     for url_entry in url_list:
@@ -47,7 +66,8 @@ def parse_url_feed(incoming) -> typing.Union[list, str]:
     return total_feed
 
 
-def check_url(url: str):
+def check_url(url: str) -> bool:
+    """Checks to see if the URL given is parseable"""
     url = str(url)
     if len(url) == 0:
         return False
@@ -68,6 +88,7 @@ def check_url(url: str):
 
 
 def find_parser(response: str) -> str:
+    """Checks to see which parser to use"""
     if len(response) <= 3:
         raise Exception("Invalid URL Length")
     test_string = (response[-3] + response[-2] + response[-1])
@@ -78,6 +99,7 @@ def find_parser(response: str) -> str:
 
 
 def return_list(incoming) -> list:
+    """Checks to see if incoming is a String or a List. If a String, adds the string to a list and returns."""
     url_list = []
     if isinstance(incoming, str):
         url_list.append(incoming)
@@ -87,6 +109,7 @@ def return_list(incoming) -> list:
 
 
 def rss_parse(soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
+    """When URL is an RSS feed, returns a linked list of dictionaries containing the titles and links"""
     feed = LinkedList()
     tag = soup.rss
     tag = tag.channel
@@ -105,6 +128,7 @@ def rss_parse(soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
 
 
 def atom_parse(soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
+    """When URL is an Atom feed, returns a linked list of dictionaries containing the titles and links"""
     feed = LinkedList()
     tag = soup.feed
     for entry in tag.find_all("entry"):
