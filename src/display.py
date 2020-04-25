@@ -4,6 +4,9 @@ from tkinter import font
 import webbrowser
 from src import fontSelect
 from src.parser import parse_url_feed
+import yaml
+import os
+from src.gui_config import Configuration
 
 
 def display(args):  # pragma: no cover
@@ -12,8 +15,10 @@ def display(args):  # pragma: no cover
     go = BooleanVar()
     go.set(True)
 
+    config = Configuration(args)
+
     time_var = IntVar()
-    time_var.set(5000)
+    time_var.set(config.time)
     # Updated upstream
     menubar = Menu(root)
 
@@ -81,24 +86,24 @@ def display(args):  # pragma: no cover
     # button = tk.Button(text="Click and Quit", command=root.quit, background='#69be28', fg='white', cursor="heart")
     # button.pack()
 
-    root.configure(background='black')
+    root.configure(background=config.background_color)
     root.config(menu=menubar)
-    custom_font = font.Font(family='Helvetica', size=12)
-    label = Message(root, font=custom_font, fg='white', cursor="pirate", width=800, background='black', padx=10,
-                    pady=10, anchor='center')
+    custom_font = font.Font(family=config.font_family, size=config.font_size)
+    label = Message(root, font=custom_font, fg=config.font_color, cursor="pirate", )
+    label.config(width=800, background=config.background_color, padx=10, pady=10, anchor='center')
 
     iteration = 0
     while go.get() is True:
         if iteration == 0:
             iteration = 1
-            feed = update_feed(args)
+            feed = update_feed(args, config.urls)
             node1 = feed.head
             temp_list = node1.data
             node2 = temp_list.head
             temp_dict = node2.data
         elif node2.next is None:
             if node1.next is None:
-                feed = update_feed(args)
+                feed = update_feed(args, config.urls)
                 node1 = feed.head
             else:
                 node1 = node1.next
@@ -122,23 +127,36 @@ def callback(url: str):  # pragma: no cover
     webbrowser.open_new(url)
 
 
-def update_feed(args):  # pragma: no cover
+def update_feed(args, config):  # pragma: no cover
     # Stashed changes
     if args.url is not None:
         feed = parse_url_feed(args.url)
     elif args.file is not None:
         feed = parse_url_feed(args.file)
-    # elif open('default_config.yml') is not None:
-    #    feed = parse_url_feed(config file url_list)
+    elif config:
+        feed = parse_url_feed(config)
     else:
-        feed = parse_url_feed("http://rss.cnn.com/rss/cnn_allpolitics.rss")
+        raise Exception("Invalid Argument")
     return feed
 
 
-def update_cycle(cycle, new_time):
-    cycle = new_time
-    return cycle
+def save_values():
+    pass
 
 
-def get_cycle(cycle):
-    return cycle
+def get_yaml():
+    entries = os.scandir('src/')
+    use_this = ""
+    for entry in entries:
+        if entry.name == "saved_config.yml":
+            use_this = entry
+            break
+        elif entry.name == "default_config.yml":
+            use_this = entry
+            break
+        else:
+            continue
+
+    with open(use_this) as f:
+        config_file = yaml.load(f, Loader=yaml.FullLoader)
+    return config_file

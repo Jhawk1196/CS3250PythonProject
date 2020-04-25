@@ -4,6 +4,7 @@ This is very much a work in progress
 import atexit
 import yaml
 from src.argument_parser import parse_args
+import os
 
 args = parse_args()
 
@@ -15,7 +16,9 @@ class Configuration:
         self.font_color = "black"
         self.font_size = 15
         self.background_color = "white"
-        self.urls = "https://xkcd.com/atom.xml"
+        self.urls = ["https://xkcd.com/atom.xml"]
+        self.font_family = "Helvetica"
+        self.time = 5000
 
     def load_yaml(self):
         # check for yaml config file
@@ -25,7 +28,20 @@ class Configuration:
             with open(config_file) as f:
                 self.conf_dict = yaml.load(f, Loader=yaml.FullLoader)
         else:
-            self.conf_dict = []
+            entries = os.scandir('src/')
+            use_this = ""
+            for entry in entries:
+                if entry.name == "saved_config.yml":
+                    use_this = entry
+                    break
+                elif entry.name == "default_config.yml":
+                    use_this = entry
+                    break
+                else:
+                    continue
+
+            with open(use_this) as f:
+                self.conf_dict = yaml.load(f, Loader=yaml.FullLoader)
 
     def __init__(self, args):
         if args:
@@ -41,6 +57,10 @@ class Configuration:
             self.urls = self.conf_dict['urls']
         if 'background_color' in self.conf_dict:
             self.background_color = self.conf_dict['background_color']
+        if 'font_family' in self.conf_dict:
+            self.font_family = self.conf_dict['font_family']
+        if 'time' in self.conf_dict:
+            self.time = self.conf_dict['time']
 
     def print_configuration(self):
         print('font size:' + str(self.font_size))

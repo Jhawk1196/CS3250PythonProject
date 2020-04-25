@@ -49,7 +49,7 @@ def parse_url_feed(incoming) -> typing.Union[list, str]:
         url_list = incoming
     for url_entry in url_list:
         if not check_url(url_entry):
-            return "Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml: " + url_entry
+            raise Exception("Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml: " + url_entry)
         parse_value = find_parser(url_entry)
         response = requests.get(url_entry)
         soup = BeautifulSoup(response.content, parse_value)
@@ -106,7 +106,7 @@ def check_url(url: str):
 
 def find_parser(response: str) -> str:
     if len(response) <= 3:
-        return "Invalid URL Length"
+        raise Exception("Invalid URL Length")
     test_string = (response[-3] + response[-2] + response[-1])
     if test_string == "tml":
         return "lxml"
