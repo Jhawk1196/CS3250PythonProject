@@ -142,21 +142,3 @@ def update_feed(args, config):  # pragma: no cover
 
 def save_values():
     pass
-
-
-def get_yaml():
-    entries = os.scandir('src/')
-    use_this = ""
-    for entry in entries:
-        if entry.name == "saved_config.yml":
-            use_this = entry
-            break
-        elif entry.name == "default_config.yml":
-            use_this = entry
-            break
-        else:
-            continue
-
-    with open(use_this) as f:
-        config_file = yaml.load(f, Loader=yaml.FullLoader)
-    return config_file
