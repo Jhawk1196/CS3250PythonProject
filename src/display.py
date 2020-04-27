@@ -153,6 +153,7 @@ class Display:
         self.label.config(background=self.config.background_color, padx=10, pady=10, anchor='center')
         self.label.pack(fill=tk.BOTH, expand=True)
         root.geometry("")
+        #removed .min and .max
         #self.display_message(args)
         #root.mainloop()
         self.display_message(args)
