@@ -38,7 +38,7 @@ class Configuration:
                 self.conf_dict = yaml.load(f, Loader=yaml.FullLoader)
 
     def __init__(self, args):
-        if args.config:
+        if args:
             self.load_yaml()
 
         self.make_defaults()

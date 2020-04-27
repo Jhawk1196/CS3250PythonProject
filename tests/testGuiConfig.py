@@ -38,6 +38,11 @@ class TestLoadsDefault(unittest.TestCase):
         config = gui_config.Configuration(args)
         self.assertEqual(config.time, 5000)
 
+class TestSavesAndLoads(unittest.TestCase):
+    pass
+
+
+
 
 
 if __name__ == '__main__':
