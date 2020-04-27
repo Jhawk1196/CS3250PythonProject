@@ -74,6 +74,9 @@ class Configuration:
     def urls(self):
         return self.urls
 
+    def time(self):
+        return self.time
+
     def save_configuration(self, save_info: dict):
         save_info['urls'] = self.urls
         with open('src/saved_config.yml', 'w') as file:
