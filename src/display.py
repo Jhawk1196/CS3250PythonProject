@@ -1,10 +1,11 @@
 import tkinter as tk  # pragma: no cover
+import webbrowser  # pragma: no cover
 from tkinter import *  # pragma: no cover
 from tkinter import font  # pragma: no cover
-import webbrowser  # pragma: no cover
+
 from src import fontSelect  # pragma: no cover
-from src.parser import parse_url_feed  # pragma: no cover
 from src.gui_config import Configuration  # pragma: no cover
+from src.parser import parse_url_feed  # pragma: no cover
 
 root: Tk = Tk()
 
@@ -149,10 +150,9 @@ class Display:
         root.config(menu=menubar)
         custom_font = font.Font(family=self.config.font_family, size=self.config.font_size)
         self.label = Label(root, font=custom_font, fg=self.config.font_color, cursor="pirate")
-        self.label.config(width=750, background=self.config.background_color, padx=10, pady=10, anchor='center')
+        self.label.config(background=self.config.background_color, padx=10, pady=10, anchor='center')
         self.label.pack(fill=tk.BOTH, expand=True)
-        root.minsize(750, 50)
-        root.maxsize(750, 200)
+        root.geometry("")
         #self.display_message(args)
         #root.mainloop()
         self.display_message(args)
