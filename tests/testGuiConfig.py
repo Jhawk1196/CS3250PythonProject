@@ -20,6 +20,25 @@ class TestLoadsDefault(unittest.TestCase):
         config = gui_config.Configuration(args)
         self.assertEqual(config.font_color, 'white')
 
+    def test_bg_color(self):
+        sys.argv[1:] = ["--config", "default_config.yml"]
+        args = argument_parser.parse_args()
+        config = gui_config.Configuration(args)
+        self.assertEqual(config.background_color, 'black')
+
+    def test_font(self):
+        sys.argv[1:] = ["--config", "default_config.yml"]
+        args = argument_parser.parse_args()
+        config = gui_config.Configuration(args)
+        self.assertEqual(config.font_family, 'Helvetica')
+
+    def test_time(self):
+        sys.argv[1:] = ["--config", "default_config.yml"]
+        args = argument_parser.parse_args()
+        config = gui_config.Configuration(args)
+        self.assertEqual(config.time, 5000)
+
+
 
 if __name__ == '__main__':
     unittest.main()
