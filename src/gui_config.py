@@ -38,7 +38,7 @@ class Configuration:
                 self.conf_dict = yaml.load(f, Loader=yaml.FullLoader)
 
     def __init__(self, args):
-        if args:
+        if args.config:
             self.load_yaml()
 
         self.make_defaults()
@@ -73,6 +73,9 @@ class Configuration:
 
     def urls(self):
         return self.urls
+
+    def time(self):
+        return self.time
 
     def save_configuration(self, save_info: dict):
         save_info['urls'] = self.urls
