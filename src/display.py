@@ -42,6 +42,10 @@ class Display:
 
         self.go.set(True)
         self.iteration.set(False)
+        self.w = 800
+        self.h = 50
+        self.x = None
+        self.y = None
 
         self.label = None
         self.config = None
@@ -152,15 +156,21 @@ class Display:
         self.label = Label(root, font=custom_font, fg=self.config.font_color, cursor="pirate")
         self.label.config(background=self.config.background_color, padx=10, pady=10, anchor='center')
         self.label.pack(fill=tk.BOTH, expand=True)
-        root.geometry("")
+        ws = root.winfo_screenwidth()
+        hs = root.winfo_screenheight()
+        self.x = (ws/2) - (self.w/2)
+        self.y = (hs/2) - (self.h/2)
+        root.geometry('%dx%d+%d+%d' % (self.w, self.h, self.x, self.y))
         #removed .min and .max
-        #self.display_message(args)
-        #root.mainloop()
         self.display_message(args)
+        root.mainloop()
+
+        """
         while self.go.get():
             root.update_idletasks()
             root.update()
             root.after(self.time_var.get(), self.display_message(args))
+        """
 
     def save_values(self):  # pragma: no cover
         save_dict = {'time': self.time_var.get(), 'font_size': self.size.get(), 'font_color': self.color.get(),
