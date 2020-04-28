@@ -15,6 +15,7 @@ class Node:  # pragma: no cover
     Data holds any object.
     Next points to the next node, and should always be a node.
     """
+
     def __init__(self, data):
         """Initialize Node Class"""
         self.data = data
@@ -27,6 +28,7 @@ class LinkedList:  # pragma: no cover
     Head only contains the first link in the list, and should be called at the beginning of scan.
     Tail only contains the last link in the list, and should not be called.
     """
+
     def __init__(self):
         """Initialize Linked List Class"""
         self.head = None
@@ -122,6 +124,7 @@ def rss_parse(soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
         for title in item.find_all(re.compile("title")):
             for entry in title.find_all(string=True):
                 feed_dict["RSS_String"] = entry
+                feed_dict["RSS_String"] = truncate(feed_dict["RSS_String"])
         for link in item.find_all(re.compile("link")):
             for entry in link.find_all(string=True):
                 feed_dict["Link"] = entry
@@ -138,7 +141,16 @@ def atom_parse(soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
         for title in entry.find_all("title"):
             for string in title.find_all(string=True):
                 feed_dict["RSS_String"] = string
+                feed_dict["RSS_String"] = truncate(feed_dict["RSS_String"])
         for link in entry.find_all(re.compile("link")):
             feed_dict["Link"] = link.get('href')
         feed.add_list_item(feed_dict)
     return feed
+
+
+def truncate(input_line: str) -> str:
+    if len(input_line) >= 80:
+        input_line = input_line[0:79]
+        return input_line + "..."
+    else:
+        return input_line

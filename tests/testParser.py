@@ -78,3 +78,15 @@ class TestParseUrl(unittest.TestCase):
                     "https://xkcd.com/atom.xml", "http://feeds.feedburner.com/ign/all"]
         with self.assertRaises(expected_exception=Exception):
             parser.parse_url_feed(url_list)
+
+
+class TestTruncate(unittest.TestCase):
+    def test_input_lessThan80(self):
+        self.assertEqual(parser.truncate("a"), "a")
+        self.assertEqual(parser.truncate("abcdefghijklmnopqrstuvwxyz"), "abcdefghijklmnopqrstuvwxyz")
+        self.assertEqual(parser.truncate("ThisLineContains79CharactersThisLineContains79CharactersThisLineContains79Chara"),
+                         "ThisLineContains79CharactersThisLineContains79CharactersThisLineContains79Chara")
+
+    def test_input_greaterThan80(self):
+        self.assertEqual(parser.truncate("ThisLineContains84CharactersThisLineContains84CharactersThisLineContains84Characters"),
+                         "ThisLineContains84CharactersThisLineContains84CharactersThisLineContains84Chara...")

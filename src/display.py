@@ -158,19 +158,17 @@ class Display:
         self.label.pack(fill=tk.BOTH, expand=True)
         ws = root.winfo_screenwidth()
         hs = root.winfo_screenheight()
-        self.x = (ws/2) - (self.w/2)
-        self.y = (hs/2) - (self.h/2)
+        self.x = (ws / 2) - (self.w / 2)
+        self.y = (hs / 2) - (self.h / 2)
         root.geometry('%dx%d+%d+%d' % (self.w, self.h, self.x, self.y))
-        #removed .min and .max
+        # removed .min and .max
         self.display_message(args)
-        root.mainloop()
+        # root.mainloop()
 
-        """
         while self.go.get():
             root.update_idletasks()
             root.update()
             root.after(self.time_var.get(), self.display_message(args))
-        """
 
     def save_values(self):  # pragma: no cover
         save_dict = {'time': self.time_var.get(), 'font_size': self.size.get(), 'font_color': self.color.get(),
@@ -201,4 +199,4 @@ class Display:
         self.var_title.set(temp_dict["RSS_String"])
         self.label.bind("<Button-1>", lambda e: callback(temp_dict["Link"]))
         self.label.config(textvariable=self.var_title)
-        #root.after(self.time_var.get(), self.display_message(args))
+        # root.after(self.time_var.get(), self.display_message(args))
