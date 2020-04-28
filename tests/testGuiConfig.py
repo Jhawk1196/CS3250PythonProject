@@ -5,7 +5,6 @@ import src.gui_config as gui_config
 import src.argument_parser as argument_parser
 
 
-
 class TestLoadsDefault(unittest.TestCase):
     # test to make sure it loads the default configuration appropriately
     def test_font_size(self):
@@ -38,12 +37,6 @@ class TestLoadsDefault(unittest.TestCase):
         config = gui_config.Configuration(args)
         self.assertEqual(config.time, 5000)
 
+
 class TestSavesAndLoads(unittest.TestCase):
     pass
-
-
-
-
-
-if __name__ == '__main__':
-    unittest.main()
