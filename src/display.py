@@ -27,7 +27,7 @@ def callback(url: str):  # pragma: no cover
     webbrowser.open_new(url)
 
 
-class Display:
+class Display:  # pragma: no cover
     def __init__(self):  # pragma: no cover
         self.size = IntVar()
         self.time_var = IntVar()
