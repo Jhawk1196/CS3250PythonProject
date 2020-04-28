@@ -6,17 +6,19 @@ args = parse_args()
 
 
 class Configuration:
-    def make_defaults(self):
-        # defaults:
+    def make_defaults(
+            self):
+        """Defaults for GUI, fonts and test URL """
         self.font_color = "black"
-        self.font_size = 15
+        self.font_size = 12
         self.background_color = "white"
         self.urls = ["https://xkcd.com/atom.xml"]
         self.font_family = "Helvetica"
         self.time = 5000
 
-    def load_yaml(self):
-        # check for yaml config file
+    def load_yaml(
+            self):
+        """Accesses user given .yml file to load saved configuration """
         if args.config:
             config_file = args.config[0]
             # todo this should be in a try block to catch bad formatting
@@ -37,7 +39,13 @@ class Configuration:
             with open(use_this) as f:
                 self.conf_dict = yaml.load(f, Loader=yaml.FullLoader)
 
-    def __init__(self, args):
+    def __init__(
+            self, args):
+        """
+        If arguments are provided via command line, load_yaml is called to for saved configuration
+        Sets default values for GUI using make_defaults method, then loads any saved configurations from .yml
+        :param args: command line arguments
+        """
         if args:
             self.load_yaml()
 
@@ -56,28 +64,60 @@ class Configuration:
         if 'time' in self.conf_dict:
             self.time = self.conf_dict['time']
 
-    def print_configuration(self):
+    def print_configuration(
+            self):
+        """Prints configuration to console """
         print('font size:' + str(self.font_size))
         print('font color:' + self.font_color)
         print('background color:' + self.background_color)
         print('urls:' + self.urls)
 
-    def font_size(self):
+    def font_size(
+            self):
+        """
+        returns font size of given font
+        :return: font size
+        """
         return self.font_size
 
-    def font_color(self):
+    def font_color(
+            self):
+        """
+        returns font color stored in given Message (label)
+        :return: font color
+        """
         return self.font_color
 
-    def background_color(self):
+    def background_color(
+            self):
+        """
+        returns background color stored in given Message (label)
+        :return: background color
+        """
         return self.background_color
 
-    def urls(self):
+    def urls(
+            self):
+        """
+        returns web address for given URL
+        :return: url
+        """
         return self.urls
 
-    def time(self):
+    def time(
+            self):
+        """
+        returns constantly incremented time value at current point
+        :return: time
+        """
         return self.time
 
-    def save_configuration(self, save_info: dict):
+    def save_configuration(
+            self, save_info: dict):
+        """
+        Saves user selected (or default) settings for GUI and urls
+        :param save_info: a dictionary containing saved preferences for GUI and urls
+        """
         save_info['urls'] = self.urls
         with open('src/saved_config.yml', 'w') as file:
             yaml.dump(save_info, file)
