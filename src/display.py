@@ -7,7 +7,7 @@ from src import fontSelect  # pragma: no cover
 from src.gui_config import Configuration  # pragma: no cover
 from src.parser import parse_url_feed  # pragma: no cover
 
-root: Tk = Tk()
+root: Tk = Tk()  # pragma: no cover
 
 
 def update_feed(args, config):  # pragma: no cover
@@ -28,7 +28,7 @@ def callback(url: str):  # pragma: no cover
 
 
 class Display:
-    def __init__(self):
+    def __init__(self):  # pragma: no cover
         self.size = IntVar()
         self.time_var = IntVar()
 
@@ -175,7 +175,7 @@ class Display:
                      'background_color': self.background.get(), 'font_family': self.family.get()}
         self.config.save_configuration(save_dict)
 
-    def display_message(self, args):
+    def display_message(self, args):  # pragma: no cover
         if not self.iteration.get():
             self.iteration.set(True)
             feed = update_feed(args, self.config.urls)
