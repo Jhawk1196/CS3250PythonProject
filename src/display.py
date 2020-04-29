@@ -175,6 +175,7 @@ class Display:  # pragma: no cover
         self.display_message(args)
         # root.mainloop()
 
+        # https://www.youtube.com/watch?v=gm-7kdgNDMk
         while self.go.get():
             try:
                 for time in range(0, self.time_var.get(), 10):
