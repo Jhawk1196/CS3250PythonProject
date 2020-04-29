@@ -15,6 +15,7 @@ class Configuration:
         self.urls = ["https://xkcd.com/atom.xml"]
         self.font_family = "Helvetica"
         self.time = 5000
+        self.window_placement = None
 
     def load_yaml(
             self):
@@ -63,6 +64,8 @@ class Configuration:
             self.font_family = self.conf_dict['font_family']
         if 'time' in self.conf_dict:
             self.time = self.conf_dict['time']
+        if 'window_placement' in self.conf_dict:
+            self.window_placement = self.conf_dict['window_placement']
 
     def print_configuration(
             self):
@@ -111,6 +114,14 @@ class Configuration:
         :return: time
         """
         return self.time
+
+    def window_placement(
+            self):
+        """
+        returns the window placement values
+        :return: window_placement
+        """
+        return self.window_placement
 
     def save_configuration(
             self, save_info: dict):

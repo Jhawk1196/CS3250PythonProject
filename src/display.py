@@ -170,11 +170,11 @@ class Display:  # pragma: no cover
         hs = root.winfo_screenheight()
         self.x = (ws / 2) - (self.w / 2)
         self.y = (hs / 2) - (self.h / 2)
-        root.geometry('%dx%d+%d+%d' % (self.w, self.h, self.x, self.y))
-        # removed .min and .max
+        if self.config.window_placement is not None:
+            root.geometry(self.config.window_placement)
+        else:
+            root.geometry('%dx%d+%d+%d' % (self.w, self.h, self.x, self.y))
         self.display_message(args)
-        # root.mainloop()
-
         # https://www.youtube.com/watch?v=gm-7kdgNDMk
         while self.go.get():
             try:
@@ -189,7 +189,8 @@ class Display:  # pragma: no cover
             self):  # pragma: no cover
         """Saves current configurations as a .yml file"""
         save_dict = {'time': self.time_var.get(), 'font_size': self.size.get(), 'font_color': self.color.get(),
-                     'background_color': self.background.get(), 'font_family': self.family.get()}
+                     'background_color': self.background.get(), 'font_family': self.family.get(),
+                     "window_placement": root.geometry()}
         self.config.save_configuration(save_dict)
 
     def display_message(
