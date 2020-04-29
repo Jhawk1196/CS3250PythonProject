@@ -155,9 +155,9 @@ class Display:  # pragma: no cover
         # Menu to quit program with option to save settings as .yml configuration file
         exit_menu = Menu(menubar)
         exit_menu.add_command(label="Save and exit", command=lambda: [
-            self.go.set(False), self.save_values(), self.time_var.set(0), root.quit()])
+            self.go.set(False), self.save_values(), self.time_var.set(0), root.destroy(), root.quit()])
         exit_menu.add_command(label="Exit without Saving", command=lambda: [
-            self.go.set(False), self.time_var.set(0), root.quit()])
+            self.go.set(False), self.time_var.set(0), root.destroy(), root.quit()])
         menubar.add_cascade(label="Exit Program", menu=exit_menu)
 
         root.configure(background=self.config.background_color)
@@ -176,9 +176,13 @@ class Display:  # pragma: no cover
         # root.mainloop()
 
         while self.go.get():
-            root.update_idletasks()
-            root.update()
-            root.after(self.time_var.get(), self.display_message(args))
+            try:
+                for time in range(0, self.time_var.get(), 10):
+                    root.after(4, root.update())
+                    root.after(4, root.update_idletasks())
+            except TclError:
+                exit()
+            self.display_message(args)
 
     def save_values(
             self):  # pragma: no cover
