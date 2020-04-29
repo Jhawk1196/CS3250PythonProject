@@ -219,4 +219,3 @@ class Display:  # pragma: no cover
         self.var_title.set(temp_dict["RSS_String"])
         self.label.bind("<Button-1>", lambda e: callback(temp_dict["Link"]))
         self.label.config(textvariable=self.var_title)
-        # root.after(self.time_var.get(), self.display_message(args))
