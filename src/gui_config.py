@@ -43,8 +43,9 @@ class Configuration:
     def __init__(
             self, args):
         """
-        If arguments are provided via command line, load_yaml is called to for saved configuration
-        Sets default values for GUI using make_defaults method, then loads any saved configurations from .yml
+        If arguments are provided via command line, load_yaml is called to for
+        saved configuration. Sets default values for GUI using make_defaults
+        method, then loads any saved configurations from .yml
         :param args: command line arguments
         """
         if args:
@@ -127,7 +128,8 @@ class Configuration:
             self, save_info: dict):
         """
         Saves user selected (or default) settings for GUI and urls
-        :param save_info: a dictionary containing saved preferences for GUI and urls
+        :param save_info: a dictionary containing saved preferences for GUI
+        and urls
         """
         save_info['urls'] = self.urls
         with open('src/saved_config.yml', 'w') as file:

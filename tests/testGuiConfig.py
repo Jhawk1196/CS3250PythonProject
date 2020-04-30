@@ -23,7 +23,9 @@ class TestLoadsDefault(unittest.TestCase):
 
     def test_bg_color(
             self):
-        """Test GUI correctly loads saved config data for GUI background color"""
+        """
+        Test GUI correctly loads saved config data for GUI background color
+        """
         sys.argv[1:] = ["--config", "default_config.yml"]
         args = argument_parser.parse_args()
         config = gui_config.Configuration(args)
@@ -31,7 +33,9 @@ class TestLoadsDefault(unittest.TestCase):
 
     def test_font(
             self):
-        """Test GUI correctly loads saved config data for font style (family)"""
+        """
+        Test GUI correctly loads saved config data for font style (family)
+        """
         sys.argv[1:] = ["--config", "default_config.yml"]
         args = argument_parser.parse_args()
         config = gui_config.Configuration(args)
@@ -39,7 +43,9 @@ class TestLoadsDefault(unittest.TestCase):
 
     def test_time(
             self):
-        """Test GUI correctly loads saved config data for cycle time between feeds"""
+        """
+        Test GUI correctly loads saved config data for cycle time between feeds
+        """
         sys.argv[1:] = ["--config", "default_config.yml"]
         args = argument_parser.parse_args()
         config = gui_config.Configuration(args)

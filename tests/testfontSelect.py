@@ -10,7 +10,9 @@ class TestFontStyle(unittest.TestCase):
     @patch('tkinter.font.Font', autospec=True)
     def test_calls_config(
             self, mock_font):
-        """Test font_style method correctly called config to change font family"""
+        """
+        Test font_style method correctly called config to change font family
+        """
         root = Tk()
         custom = mock_font(root, family='Helvetica', size=12)
         fontSelect.font_style(custom, 'Times')
@@ -18,7 +20,10 @@ class TestFontStyle(unittest.TestCase):
 
     def test_configs_font(
             self):
-        """Test for font_style and font_size methods correctly changing appropriate attribute (family, size)"""
+        """
+        Test for font_style and font_size methods correctly changing
+        appropriate attribute (family, size)
+        """
         root = Tk()
         custom = font.Font(root, family='Helvetica', size=12)
         self.assertEqual(custom.cget('family'), 'Helvetica')
@@ -29,8 +34,12 @@ class TestFontStyle(unittest.TestCase):
 
     def test_fontColor(
             self):
-        """Test font_color method correctly changes fg attribute of Message object called label"""
+        """
+        Test font_color method correctly changes fg attribute of Message
+         called label
+         """
         root = Tk()
         label = Message(root, fg='Red')
         label.pack()
-        self.assertEqual('Black', fontSelect.font_color(label, 'Black').cget("fg"))
+        self.assertEqual('Black', fontSelect.font_color(label, 'Black')
+                         .cget("fg"))

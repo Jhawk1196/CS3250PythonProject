@@ -26,7 +26,8 @@ class Node:  # pragma: no cover
 class LinkedList:  # pragma: no cover
     """
     Creates a Linked List, with a head, and a tail.
-    Head only contains the first link in the list, and should be called at the beginning of scan.
+    Head only contains the first link in the list, and should be called at the
+    beginning of scan.
     Tail only contains the last link in the list, and should not be called.
     """
 
@@ -54,12 +55,16 @@ class LinkedList:  # pragma: no cover
 
 def parse_url_feed(
         incoming) -> LinkedList:
-    """Receives either a list of URLs or a single URL, and returns a Linked List of Dictionaries"""
+    """
+    Receives either a list of URLs or a single URL, and returns a Linked
+    List of Dictionaries
+    """
     total_feed = LinkedList()
     url_list = return_list(incoming)
     for url_entry in url_list:
         if not check_url(url_entry):
-            raise Exception("Invalid URL. Must Be a RSS Feed URL ending in .rss, .html, or .xml: " + url_entry)
+            raise Exception("Invalid URL. Must Be a RSS Feed URL ending in "
+                            ".rss, .html, or .xml: " + url_entry)
         parse_value = find_parser(url_entry)
         response = requests.get(url_entry)
         soup = BeautifulSoup(response.content, parse_value)
@@ -110,7 +115,10 @@ def find_parser(
 
 def return_list(
         incoming) -> list:
-    """Checks to see if incoming is a String or a List. If a String, adds the string to a list and returns."""
+    """
+    Checks to see if incoming is a String or a List. If a String, adds the
+    string to a list and returns.
+    """
     url_list = []
     if isinstance(incoming, str):
         url_list.append(incoming)
@@ -121,7 +129,10 @@ def return_list(
 
 def rss_parse(
         soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
-    """When URL is an RSS feed, returns a linked list of dictionaries containing the titles and links"""
+    """
+    When URL is an RSS feed, returns a linked list of dictionaries
+    containing the titles and links
+    """
     feed = LinkedList()
     tag = soup.rss
     tag = tag.channel
@@ -142,7 +153,10 @@ def rss_parse(
 
 def atom_parse(
         soup: BeautifulSoup) -> LinkedList:  # pragma: no cover
-    """When URL is an Atom feed, returns a linked list of dictionaries containing the titles and links"""
+    """
+    When URL is an Atom feed, returns a linked list of dictionaries containing
+    the titles and links
+    """
     feed = LinkedList()
     tag = soup.feed
     for entry in tag.find_all("entry"):
@@ -160,8 +174,9 @@ def atom_parse(
 def truncate(
         input_line: str) -> str:
     """
-    When a string is over 80 characters long, string is limited to 79 characters for readability in GUI window
-    Ellipsis (...) is added to denote unseen text
+    When a string is over 80 characters long, string is limited to 79
+    characters for readability in GUI window, An ellipsis (...) is added to
+    denote unseen text
     """
     if len(input_line) >= 80:
         input_line = input_line[0:79]

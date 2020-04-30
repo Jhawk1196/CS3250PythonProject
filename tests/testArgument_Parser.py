@@ -25,7 +25,9 @@ class TestURL(unittest.TestCase):
 
     def test_single_config(
             self):
-        """Test for only configuration file property of command line arguments"""
+        """
+        Test for only configuration file property of command line arguments
+        """
         sys.argv[1:] = ["--config", "some_config.yaml"]
         args = argument_parser.parse_args()
         self.assertEqual(args.config, ['some_config.yaml'])
@@ -45,12 +47,15 @@ class TestURL(unittest.TestCase):
 
     def test_urls_and_files(
             self):
-        """ Test for multiple urls and file properties of command line arguments"""
+        """
+        Test for multiple urls and file properties of command line arguments
+        """
         url_check1 = "google.com"
         url_check2 = "duckduckgo.com"
         file_check1 = "some_file.json"
         file_check2 = "another_file.json"
-        sys.argv[1:] = ["--url", url_check1, url_check2, "--file", file_check1, file_check2]
+        sys.argv[1:] = ["--url", url_check1, url_check2, "--file", file_check1,
+                        file_check2]
         args = argument_parser.parse_args()
         self.assertEqual(args.url, [url_check1, url_check2])
         self.assertEqual(args.file, [file_check1, file_check2])
