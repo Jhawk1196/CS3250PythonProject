@@ -1,5 +1,4 @@
 import argparse
-from sys import argv
 
 
 def parse_args():
