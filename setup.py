@@ -1,9 +1,12 @@
-from distutils.core import setup  # pragma: no cover
+from setuptools import setup, find_packages  # pragma: no cover
 
 setup(
     name='Harry Parser',
-    version='0.9',
-    packages=[open('requirements.txt').read()],  # pragma: no cover
+    version='1.0',
+    author=[open('AUTHORS.md').read()],  # pragma: no cover
+    description='An RSS Feed Reader',
+    packages=find_packages(),  # pragma: no cover
     license='MIT License',
-    long_description=open('README.txt').read(),  # pragma: no cover
+    long_description=open('README.md').read(),  # pragma: no cover
+    python_requires='>=3.6'
 )
