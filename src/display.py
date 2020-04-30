@@ -195,8 +195,7 @@ class Display:  # pragma: no cover
         root.config(menu=menubar)
         custom_font = font.Font(family=self.config.font_family,
                                 size=self.config.font_size)
-        self.label = Label(root, font=custom_font, fg=self.config.font_color,
-                           cursor="pirate")
+        self.label = Label(root, font=custom_font, fg=self.config.font_color)
         self.label.config(background=self.config.background_color, padx=10,
                           pady=10, anchor='center')
         self.label.pack(fill=tk.BOTH, expand=True)
