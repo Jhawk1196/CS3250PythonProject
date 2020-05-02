@@ -1,4 +1,4 @@
-# Harry Parser and the Sourcerer's Feeds
+# Harry Parser and the Source-rer's Feeds
 
 [![Build Status](https://travis-ci.com/Jhawk1196/CS3250PythonProject.svg?branch=master)](https://travis-ci.com/Jhawk1196/CS3250PythonProject)
 
