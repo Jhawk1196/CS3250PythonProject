@@ -101,3 +101,17 @@ class TestArgs(unittest.TestCase):
         args.config = ["default_config.yml"]
         config = gui_config.Configuration(args)
         self.assertEqual(config.font_color, 'white')
+
+
+class TestSave(unittest.TestCase):
+    def test_save(self):
+        args = argument_parser.parse_args()
+        config = gui_config.Configuration(args)
+        save_info = {}
+        save_info['font_color'] = 'orange'
+        config.save_configuration(save_info)
+        sys.argv[1:] = ["--config", "src/saved_config.yml"]
+        os.remove("src/saved_config.yml")
+        args = argument_parser.parse_args()
+        config = gui_config.Configuration(args)
+        self.assertEqual(config.font_color, "white")
