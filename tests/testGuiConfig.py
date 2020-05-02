@@ -61,10 +61,8 @@ class TestLoadsDefault(unittest.TestCase):
         config = gui_config.Configuration(args)
         self.assertEqual(str(config.window_placement), "800x50+0+25")
 
-
     def test_can_change(
             self):
-
         """
         Tests that the correct defaults are loaded if no .yml file is provided
         """
@@ -74,6 +72,3 @@ class TestLoadsDefault(unittest.TestCase):
         config.background_color = 'white'
         self.assertEqual(config.font_color, "black")
         self.assertEqual(config.background_color, "white")
-
-if __name__ == "__main__":
-    unittest.main()

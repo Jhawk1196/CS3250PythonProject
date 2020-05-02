@@ -68,64 +68,8 @@ class Configuration:
         if 'window_placement' in self.conf_dict:
             self.window_placement = self.conf_dict['window_placement']
 
-    # def print_configuration(
-    #         self):
-    #     """Prints configuration to console """
-    #     print('font size:' + str(self.font_size))
-    #     print('font color:' + self.font_color)
-    #     print('background color:' + self.background_color)
-    #     print('urls:' + self.urls)
-    #
-    # def font_size(
-    #         self):
-    #     """
-    #     returns font size of given font
-    #     :return: font size
-    #     """
-    #     return self.font_size
-    #
-    # def font_color(
-    #         self):
-    #     """
-    #     returns font color stored in given Message (label)
-    #     :return: font color
-    #     """
-    #     return self.font_color
-    #
-    # def background_color(
-    #         self):
-    #     """
-    #     returns background color stored in given Message (label)
-    #     :return: background color
-    #     """
-    #     return self.background_color
-    #
-    # def urls(
-    #         self):
-    #     """
-    #     returns web address for given URL
-    #     :return: url
-    #     """
-    #     return self.urls
-    #
-    # def time(
-    #         self):
-    #     """
-    #     returns constantly incremented time value at current point
-    #     :return: time
-    #     """
-    #     return self.time
-    #
-    # def window_placement(
-    #         self):
-    #     """
-    #     returns the window placement values
-    #     :return: window_placement
-    #     """
-    #     return self.window_placement
-
     def save_configuration(
-            self, save_info: dict):
+            self, save_info: dict):  # pragma: no cover
         """
         Saves user selected (or default) settings for GUI and urls
         :param save_info: a dictionary containing saved preferences for GUI
