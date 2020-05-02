@@ -67,7 +67,7 @@ class Display:  # pragma: no cover
         Sets up GUI with drop down menus to change config settings
         :param args: command line arguments
         """
-        root.title("Harry Parser and the Sorcerer's Feeds")
+        root.title("Harry Parser and the Source-rer's Feeds")
 
         self.config = Configuration(args)
         self.size.set(self.config.font_size)
