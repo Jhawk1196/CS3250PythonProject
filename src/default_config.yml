@@ -8,3 +8,4 @@ urls:
   - http://rss.cnn.com/rss/cnn_topstories.rss
   - https://xkcd.com/atom.xml
   - http://feeds.feedburner.com/ign/all
+window_placement: 800x50+0+25

@@ -51,6 +51,29 @@ class TestLoadsDefault(unittest.TestCase):
         config = gui_config.Configuration(args)
         self.assertEqual(config.time, 5000)
 
+    def test_window_placement(
+            self):
+        """
+        Test GUI correctly loads saved config data for the window placement
+        """
+        sys.argv[1:] = ["--config", "default_config.yml"]
+        args = argument_parser.parse_args()
+        config = gui_config.Configuration(args)
+        self.assertEqual(str(config.window_placement), "800x50+0+25")
 
-class TestSavesAndLoads(unittest.TestCase):
-    pass
+
+    def test_can_change(
+            self):
+
+        """
+        Tests that the correct defaults are loaded if no .yml file is provided
+        """
+        args = argument_parser.parse_args()
+        config = gui_config.Configuration(args)
+        config.font_color = 'black'
+        config.background_color = 'white'
+        self.assertEqual(config.font_color, "black")
+        self.assertEqual(config.background_color, "white")
+
+if __name__ == "__main__":
+    unittest.main()
