@@ -190,7 +190,7 @@ class Display:  # pragma: no cover
             root.quit()])
         menubar.add_cascade(label="Exit Program", menu=exit_menu)
 
-        # Configur GUI's attributes, position and geometry
+        # Configure GUI's attributes, position and geometry
         root.configure(background=self.config.background_color)
         root.config(menu=menubar)
         custom_font = font.Font(family=self.config.font_family,
