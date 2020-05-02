@@ -1,12 +1,6 @@
-from src.display import helloWorld
-from src.argument_parser import parse_args
+from src.argument_parser import parse_args  # pragma: no cover
+import src.display as start  # pragma: no cover
 
-args = parse_args()
-# print(f"file is: {args.file}")
-# print(f"url is: {args.url}")
-# http://rss.cnn.com/rss/cnn_allpolitics.rss
-# https://xkcd.com/atom.xml
-# https://www.foxnews.com/politics.html
-# http://feeds.feedburner.com/ign/all
-
-helloWorld(args)
+args = parse_args()  # pragma: no cover
+lumos = start.Display  # pragma: no cover
+lumos().display(args)  # pragma: no cover

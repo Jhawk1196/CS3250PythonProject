@@ -1,8 +1,10 @@
 language: python
 python:
-  - "3.8"
+  - "3.6"
 
 dist: xenial
+services:
+  - xvfb
 
 addons:
   sonarcloud:
@@ -13,8 +15,9 @@ before_install:
   - pip install coverage
 
 script:
-  - coverage run -m unittest
-  - coverage report
+  - coverage run --source=./ -m unittest
+  - coverage report -m
+  - coverage xml -o coverage_file.xml
   - sonar-scanner
 
 after_success:
