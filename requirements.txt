@@ -1,3 +1,4 @@
+PyYAML
 mock
 requests
 beautifulsoup4
