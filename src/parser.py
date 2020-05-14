@@ -83,19 +83,17 @@ def check_url(
     url = str(url)
     if len(url) == 0:
         return False
-    test_string = (url[-3] + url[-2] + url[-1])
-    second_test_string = ""
-    https_test_string = ""
-    if len(url) > 12:
-        second_test_string = (url[7] + url[8] + url[9] + url[10] + url[11])
-        https_test_string = (url[8] + url[9] + url[10] + url[11] + url[12])
-    if test_string == "rss":
+    result1 = re.search("rss?", url)
+    result2 = re.search("xml?", url)
+    result3 = re.search("tml?", url)
+    result4 = re.search("feeds?", url)
+    if result1 is not None:
         return True
-    elif test_string == "xml":
+    elif result2 is not None:
         return True
-    elif test_string == "tml":
+    elif result3 is not None:
         return True
-    elif second_test_string == "feeds" or https_test_string == "feeds":
+    elif result4 is not None:
         return True
     else:
         return False
@@ -106,8 +104,8 @@ def find_parser(
     """Checks to see which parser to use"""
     if len(response) <= 3:
         raise Exception("Invalid URL Length")
-    test_string = (response[-3] + response[-2] + response[-1])
-    if test_string == "tml":
+    result = re.search("tml?", response)
+    if result is not None:
         return "lxml"
     else:
         return "lxml-xml"
@@ -138,13 +136,13 @@ def rss_parse(
     tag = tag.channel
     channel_dict = {"RSS_String": tag.title.string, "Link": tag.link.string}
     feed.add_list_item(channel_dict)
-    for item in tag.find_all(re.compile("item")):
+    for item in tag.find_all(re.compile("item?")):
         feed_dict = {}
-        for title in item.find_all(re.compile("title")):
+        for title in item.find_all(re.compile("title?")):
             for entry in title.find_all(string=True):
                 feed_dict["RSS_String"] = entry
                 feed_dict["RSS_String"] = truncate(feed_dict["RSS_String"])
-        for link in item.find_all(re.compile("link")):
+        for link in item.find_all(re.compile("link?")):
             for entry in link.find_all(string=True):
                 feed_dict["Link"] = entry
         feed.add_list_item(feed_dict)
@@ -165,7 +163,7 @@ def atom_parse(
             for string in title.find_all(string=True):
                 feed_dict["RSS_String"] = string
                 feed_dict["RSS_String"] = truncate(feed_dict["RSS_String"])
-        for link in entry.find_all(re.compile("link")):
+        for link in entry.find_all(re.compile("link?")):
             feed_dict["Link"] = link.get('href')
         feed.add_list_item(feed_dict)
     return feed

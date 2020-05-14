@@ -62,15 +62,6 @@ class TestURLCheck(unittest.TestCase):
         self.assertTrue(parser.check_url(
             "http://feeds.feedburner.com/ign/all"))
 
-    def test_URL_Check_Safe_FeedBurner(
-            self):
-        """
-        Asserts that a string url starting with 'https' and containing the word
-         'feeds' will return boolean true
-        """
-        self.assertTrue(parser.check_url(
-            "https://feeds.feedburner.com/ign/all"))
-
 
 class TestFindParser(unittest.TestCase):
     def test_find_parser_isXML(
