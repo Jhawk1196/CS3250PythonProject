@@ -1,6 +1,5 @@
 - Steve Hulac
 - Jarred Hawkins
 - Robert Heitzman
-- Jay Herrera
 - Matt Harvey
 - Kane Egan
